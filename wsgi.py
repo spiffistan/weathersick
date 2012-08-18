@@ -1,5 +1,6 @@
 import os
 import sys
+#
 os.environ['DJANGO_SETTINGS_MODULE'] = 'weathersick.settings'
 import django.core.handlers.wsgi
 djangoapplication = django.core.handlers.wsgi.WSGIHandler()
