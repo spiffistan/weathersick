@@ -66,7 +66,7 @@ STATIC_ROOT = '../static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'http://weathersick-capasit-static.dotcloud.com/'
+STATIC_URL = 'http://weathersick1-capasit.dotcloud.com/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
