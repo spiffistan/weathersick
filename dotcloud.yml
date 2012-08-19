@@ -1,6 +1,17 @@
 www:
+  approot: mainapp
   type: python
   config:
     python_version: v2.7
+static:
+  approot: static
+  type: static
 db:
   type: mongodb
+queue:
+  type: rabbitmq
+worker:
+  approot: worker
+  type: python-worker
+  config:
+    python_version: v2.7

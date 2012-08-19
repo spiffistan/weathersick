@@ -5,7 +5,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 admin.autodiscover()
 
-from weathersick.web.views import IndexView
+from web.views import IndexView
 
 urlpatterns = patterns('',
     # Examples:
