@@ -1,0 +1,141 @@
+body, input {
+  color: #555;
+}
+
+body {
+  background: url('jungle2.jpg') center;
+}
+
+#background {
+    width: 100%; 
+    height: 100%; 
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    z-index: 0;
+    overflow: hidden;
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+
+header {
+  height: 400px;
+}
+
+header.top {
+  height: 100px;
+}
+
+div#wrapper {
+
+  width: 840px;
+  margin: 0 auto;
+  z-index: 2 !important;
+}
+
+section#search {
+  display: table;
+  height: 100px;
+  width: 840px;
+  padding: 10px;
+  position: relative;
+  float: left;
+  background: #eee;
+
+  border: 0px solid #ccc;
+  border-radius: 70px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.9);
+
+  font-family: 'Viga', sans-serif;
+  font-size: 28px;
+  text-align: center;
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0, rgb(184,184,184)),
+	color-stop(1, rgb(255,255,255))
+);
+
+}
+
+section#search div {
+  display: table-cell;
+  width: 700px;
+  height: 80px;
+  padding: 10px 20px;
+  vertical-align: middle;
+}
+
+section#search div span {
+  color: #19b3dd;;
+}
+
+section#content {
+  width: 800px;
+  padding: 30px;
+  height: 400px;
+  float: left;
+  background: white;
+  border-radius: 10px;
+  margin-top: 40px;
+  font-family: 'Viga', sans-serif;
+  box-shadow: 0 0 70px rgba(0,0,0,0.9);
+}
+
+section#content h1 {
+  font-size: 44px;
+  margin-top: 0px;
+}
+
+.image {
+  width: 170px;
+  height: 170px;
+  background-position: 50% 50%;
+  border-radius: 90px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.9);
+  float: left;
+  margin-right: 20px;
+}
+
+input.underline {
+  width: 200px;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 2px solid #333;
+  font-family: 'Viga', sans-serif;
+  font-size: 22px;
+}
+
+input.underline.tiny {
+  width: 100px;
+}
+
+input[type="submit"] {
+  border: none;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 75px;
+  font-family: 'Viga', sans-serif;
+  font-size: 36px;  
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.02, rgb(25,178,221)),
+	color-stop(0.51, rgb(53,214,255)),
+	color-stop(1, rgb(80,255,255))
+);
+
+  box-shadow: 0 0 2px rgba(0,0,0,0.8);
+
+}
