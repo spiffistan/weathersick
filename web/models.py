@@ -18,16 +18,9 @@ from mongoengine import *
 # 
 
 class Airport(Document):
-    icao = StringField(max_length=4,null=True,blank=True)
-    iata = StringField(max_length=3)
-    name = StringField(max_length=300)
-
-class OrbitzAirport(Airport):
-    pass
-
-class OpenairAirport(Airport):
     id = models.IntegerField()
     ident = models.CharField(max_length=10)
+    name = StringField(max_length=300)
     type = models.CharField(max_length=20)
     latitude = models.CharField(max_length=50)
     longitude = models.CharField(max_length=50)
@@ -38,6 +31,8 @@ class OpenairAirport(Airport):
     municipality = models.CharField(max_length=100)
     scheduled_service = models.CharField(max_length=3)
     local_code = models.CharField(max_length=30,null=True,blank=True)
+    icao = StringField(max_length=4,null=True,blank=True)
+    iata = StringField(max_length=3)
     home_link = models.URLField(null=True,blank=True)
     wikipedia_link = models.URLField(null=True,blank=True)
     
