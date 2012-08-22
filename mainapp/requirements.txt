@@ -2,3 +2,5 @@ Django==1.4.1
 mongoengine
 werkzeug
 pymongo
+django-dajaxice
+dajax

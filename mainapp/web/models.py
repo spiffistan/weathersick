@@ -17,7 +17,7 @@ from mongoengine import *
 # FileField
 # 
 
-class Airport(Document):
+class Airports(Document):
     _id = IntField()
     continent = StringField()
     elevation = IntField()

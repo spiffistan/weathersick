@@ -8,6 +8,16 @@ import os
 with open(os.path.expanduser('~/environment.json')) as f:
     env = json.load(f)
 
+MONGODB = {
+    'db': 'weathersick',
+        'options': {
+        'host': env['DOTCLOUD_DB_MONGODB_HOST'],
+        'port': int(env['DOTCLOUD_DB_MONGODB_PORT']),
+        'username': 'admin',
+        'password': 'SorlandsCh1ps',
+    }
+}
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -15,7 +25,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 from mongoengine import connect
-connect('wsdb', host=env['DOTCLOUD_DB_MONGODB_HOST'], username=env['DOTCLOUD_DB_MONGODB_LOGIN'], password=env['DOTCLOUD_DB_MONGODB_PASSWORD'], port=int(env['DOTCLOUD_DB_MONGODB_PORT']))
+connect(MONGODB['db'], **MONGODB['options'])
 
 #DATABASES = {
 #    'default': {
@@ -99,6 +109,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'web.middleware.MongoEngineConnectionMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -127,6 +138,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'dajaxice',
+    'dajax'
     'web',
 )
 

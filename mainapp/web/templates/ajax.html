@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+
+<div class="row">
+  <script>
+    num = 1;
+    
+    def render(data) {
+      alert(data)
+      num++;
+    }
+  </script>
+  <a href="#" onclick="Dajaxice.web.ajax.load_airport(render, {'num':num})">Load an airport</a><br />
+  <ul id="airports">
+</div>
+
+{% endblock 'content' %}
