@@ -3,4 +3,3 @@ mongoengine
 werkzeug
 pymongo
 django-dajaxice
-dajax

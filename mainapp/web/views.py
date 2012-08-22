@@ -13,4 +13,4 @@ class IndexView(TemplateView):
         return context
 
 class AjaxTestView(TemplateView):
-    pass
+    template_name = 'ajax.html'
