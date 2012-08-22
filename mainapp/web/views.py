@@ -1,6 +1,7 @@
 # Create your views here.
 
 from django.views.generic import TemplateView
+from django.middleware.csrf import get_token
 
 from web.models import Airport
 

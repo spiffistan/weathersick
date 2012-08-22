@@ -1,17 +1,55 @@
 {% extends 'base.html' %}
 {% block 'content' %}
-
+{% csrf_token %}
 <div class="row">
   <script>
-    num = 1;
+    var num = 2;
+    var object;
+    function render_airport(data) { 
+      $('.value').each(function() { 
+        if (($(this).attr('id') !== 'wikipedia_link') && ($(this).attr('id') !== undefined)) {
+          $(this).text(data[$(this).attr('id')]);
+          $('#wikipedia_link').text('');
+        } else { $(this).text('Wikipedia'); $(this).attr('href', data[$(this).attr('id')]) }
+        });
+        num++;
+      }
     
-    function render(data) {
-      alert(data)
-      num++;
+    function render_count(data) {
+      $('#airport-count').text(data);
+      $('#airport-count').parent('p').removeAttr('style');
     }
   </script>
-  <a href="#" onclick="Dajaxice.web.ajax.load_airport(render, {'num':num})">Load an airport</a><br />
-  <ul id="airports">
+  <div class="row">
+    <div class="span8">  
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="Dajaxice.web.load_airport(render_airport, {'num':num})">Load a large airport</button>
+        <button class="btn btn-info" onclick="Dajaxice.web.get_count(render_count)">Get airport count</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="airport" class="span8">
+      <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd id="name" class="value">Waiting for data...</dd>
+        <dt>IATA Code</dt>
+        <dd id="iata_code" class="value"></dd>
+        <dt>Position</dt>
+        <dd><span id="latitude" class="value"></span>,<span id="longitude" class="value"></span></dd>
+        <dt>More info</dt>
+        <dd><a id="wikipedia_link" href="" class="value"></a>
+      </dl>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <div>
+        <p style="display:none">There are <strong id="airport-count">click</strong> airports in the database.</p>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
 
 {% endblock 'content' %}
