@@ -3,6 +3,9 @@ www:
   type: python
   config:
     python_version: v2.7
+rails:
+  approot: rails
+  type: ruby
 static:
   approot: static
   type: static
