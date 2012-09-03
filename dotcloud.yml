@@ -1,11 +1,14 @@
+#www:
+#  approot: mainapp
+#  type: python
+#  config:
+#    python_version: v2.7
 www:
-  approot: mainapp
-  type: python
+  approot: rails
+  type: ruby
   config:
-    python_version: v2.7
-#rails:
-#  approot: rails
-#  type: ruby
+    ruby-version: 1.9.3
+    rack-env: production
 static:
   approot: static
   type: static
