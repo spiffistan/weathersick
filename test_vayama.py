@@ -10,6 +10,19 @@ class FlightSearch(object):
     pass
 
 class VayamaSearch(FlightSearch):
+    """
+    Class to search for trips on Vayama's API.
+    
+    Only named arguments are used to initiate this class. They are:
+    trip: One of the choices in valid_trips
+    origin: Three-letter IATA airport code
+    destination: Ditto
+    origin_departure_time: datetime.datetime object for departure, origin
+    destination_departure_time: datetime.datetime object for departure, return trip
+    adults: Number of adults on the trip. It will be casted to a string, so don't worry if it's not.
+    children: ditto
+    cabin: Selection of cabin. Economy is the only one implemented.
+    """
     valid_trips = ['roundtrip', 'oneway', 'openjaw']
     
     def __init__(self, 
@@ -55,8 +68,8 @@ class VayamaSearch(FlightSearch):
 
     def construct_xml(self):
         soup = BeautifulSoup(etree.tostring(etree.Element('OTA_AirLowFareSearchRQ')), 'xml')
-        active = soup.contents[0]
-        active.attrs = {
+        query = soup.contents[0]
+        query.attrs = {
             'xmlns':'http://www.opentravel.org/OTA/2003/05',
             'xmlns:xsi':'http://www.w3.org/2001/XMLSchema-instance',
             'PrimaryLangId':'en',
@@ -76,8 +89,14 @@ class VayamaSearch(FlightSearch):
         }
         t_source.append(t_req)
         t_pos.append(t_source)
+        query.append(t_pos)
         
-        active.append(t_pos)
+        t_odinf = Tag(name='OriginDestinationInformation')
+        t_odinf.attrs {'RPH':1}
+        t_deptime = Tag(name='DepartureDateTime')
+        t_deptime.
+        
+        OriginDestinationInformation RPH="1"
         
         import pdb; pdb.set_trace()
         
