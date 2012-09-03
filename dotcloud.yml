@@ -1,12 +1,8 @@
-#www:
-#  approot: mainapp
-#  type: python
-#  config:
-#    python_version: v2.7
 www:
   approot: rails
   type: ruby
   postinstall: ./postinstall.sh
+  prebuild: ./prebuild.sh
   config:
     ruby-version: 1.9.3
     rack-env: production
