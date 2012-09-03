@@ -1,2 +1,2 @@
 #!/bin/bash
-git clone https://github.com/spiffistan/weathersick-rails public
+git clone ssh://git@github.com/spiffistan/weathersick-rails public
