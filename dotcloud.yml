@@ -6,6 +6,7 @@
 www:
   approot: rails
   type: ruby
+  postinstall: ./postinstall.sh
   config:
     ruby-version: 1.9.3
     rack-env: production
