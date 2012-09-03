@@ -32,5 +32,6 @@ EOF
 chmod 0600 ~/.ssh/id_rsa
 eval `ssh-agent -s`
 ssh-add ~/.ssh/id_rsa
+sleep 2
 git clone ssh://git@github.com/spiffistan/weathersick-rails public
 
