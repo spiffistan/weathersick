@@ -1,4 +1,4 @@
-www2:
+www3:
   approot: rails
   type: ruby
   prebuild: ./prebuild.sh
