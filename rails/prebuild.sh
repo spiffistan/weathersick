@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 cat >~/.ssh/id_rsa <<EOF
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAzdAa+u9PByIeRJdKZILhXfraNtzbXPrF8MFlYiv4t+7Fan/o
@@ -30,8 +29,11 @@ SLOqQJ5iWcZFgvO/DjCQBuF5vn/JN6Jhj6LdK2QKw3E+y0O3cvc4
 -----END RSA PRIVATE KEY-----
 EOF
 chmod 0600 ~/.ssh/id_rsa
+echo "Added key"
 eval `ssh-agent -s`
+echo "SSH agent started"
 ssh-add ~/.ssh/id_rsa
+echo "SSH key added"
 sleep 2
 git clone ssh://git@github.com/spiffistan/weathersick-rails public
-
+echo "Cloned that bitch"
