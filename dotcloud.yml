@@ -3,7 +3,7 @@ www:
   type: ruby
   config:
     ruby-version: 1.9.3
-    rack-env: production
+    rack-env: development
 static:
   approot: static
   type: static
