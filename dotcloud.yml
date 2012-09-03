@@ -1,7 +1,6 @@
 www:
   approot: rails
   type: ruby
-  postinstall: ./postinstall.sh
   prebuild: ./prebuild.sh
   config:
     ruby-version: 1.9.3
