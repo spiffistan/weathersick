@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 cat >~/.ssh/id_rsa <<EOF
 -----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAzdAa+u9PByIeRJdKZILhXfraNtzbXPrF8MFlYiv4t+7Fan/o
