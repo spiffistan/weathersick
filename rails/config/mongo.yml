@@ -1,0 +1,24 @@
+defaults: &defaults
+  host: weathersick-capasit-db-0.dotcloud.com
+  port: 34301
+  username: admin
+  password: SorlandsCh1ps
+  adapter: mongodb
+
+development:
+  <<: *defaults
+  database: weathersick
+#  database: weathersick_development
+
+test:
+  <<: *defaults
+  database: weathersick_test
+  username: weathersick_test
+  password: weathersick_test
+
+# set these environment variables on your prod server
+production:
+  <<: *defaults
+  database: weathersick
+#  username: <%= ENV['MONGO_USERNAME'] %>
+#  password: <%= ENV['MONGO_PASSWORD'] %>
