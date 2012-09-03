@@ -40,3 +40,4 @@ echo "SSH key added"
 sleep 2
 git clone ssh://git@github.com/spiffistan/weathersick-rails public
 echo "Cloned that bitch"
+exit
