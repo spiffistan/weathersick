@@ -1,7 +1,7 @@
-www:
+www2:
   approot: rails
   type: ruby
-  postbuild: ./prebuild.sh
+  #postbuild: ./prebuild.sh
   config:
     ruby-version: 1.9.3
     rack-env: production
