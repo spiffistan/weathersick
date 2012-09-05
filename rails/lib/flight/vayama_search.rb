@@ -12,7 +12,7 @@ class Flight::VayamaSearch < Flight::Search
   attr_reader :requestor_id, :requestor_url, :requestor_type
 
   def initialize(api_url, params)
-    api_url ||= API_URL
+      api_url ||= API_URL
     super(api_url) 
     @requestor_url = params[:url] 
     @requestor_id = params[:id] 
@@ -102,9 +102,16 @@ class Flight::VayamaSearch < Flight::Search
   def process_response(type, response)
     results = []
     doc = Nokogiri::XML(response.body)
-    puts doc
+    #puts doc
     doc.remove_namespaces!
-
+    success = true
+    
+    doc.xpath('//OTA_AirLowFareSearchRS').each do |elem|
+      if elem['EchoToken'] == "Error"
+        success = false
+      end
+    end
+    
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
 
       itinerary = {}
@@ -146,9 +153,14 @@ class Flight::VayamaSearch < Flight::Search
         itinerary[:total_fare] = fare
       end
 
+      elem.xpath('.//BookItArgument[@Name="clickableURL"]').each do |elem|
+        link = elem['Value']
+        itinerary[:booking_link] = link
+      end
+      
       results << itinerary
     end
-
-    return results
+    final = {'success'=>success, 'results'=>results}
+    return final
   end
 end

@@ -41,7 +41,7 @@ class HomeController < ApplicationController
     params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
     booker = Flight::VayamaSearch.new(nil, params)
 
-    @results = booker.search(Flight::VayamaSearch::SEARCH_OW, 'CDG', 'SFO', (DateTime.now >> 1), 1)
+    @results = booker.search(Flight::VayamaSearch::SEARCH_OW, 'EWR', 'SFO', (DateTime.now >> 1), 1)
 
     respond_with @results do |format|
       format.json { render json: @results }
