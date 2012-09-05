@@ -2,6 +2,25 @@
 *.DS_Store
 data.db
 
+# Rails
+
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/rails/.bundle
+/rails/vendor/bundle
+/rails/log/*
+/rails/tmp/*
+/rails/db/*.sqlite3
+/rails/public/system/*
+/rails/coverage/
+/rails/spec/tmp/*
+/rails/**.orig
+/rails/rerun.txt
+/rails/pickle-email-*.html
+
 # Packages
 *.egg
 *.egg-info
