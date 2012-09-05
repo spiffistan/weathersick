@@ -12,7 +12,7 @@ class Flight::VayamaSearch < Flight::Search
   attr_reader :requestor_id, :requestor_url, :requestor_type
 
   def initialize(api_url, params)
-      api_url ||= API_URL
+    api_url ||= API_URL
     super(api_url) 
     @requestor_url = params[:url] 
     @requestor_id = params[:id] 
@@ -104,13 +104,7 @@ class Flight::VayamaSearch < Flight::Search
     doc = Nokogiri::XML(response.body)
     #puts doc
     doc.remove_namespaces!
-    success = true
-    
-    doc.xpath('//OTA_AirLowFareSearchRS').each do |elem|
-      if elem['EchoToken'] == "Error"
-        success = false
-      end
-    end
+    success = doc.xpath('//OTA_AirLowFareSearchRS').first['EchoToken'] == "Error" ? false : true
     
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
 
@@ -146,21 +140,24 @@ class Flight::VayamaSearch < Flight::Search
         itinerary[:segments] << segment
       end
 
-      elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/BaseFare').each do |elem|
-        dec = elem['DecimalPlaces'].to_i
-        fare = elem['Amount']
-        (1..dec).each { fare.chop! } 
-        itinerary[:total_fare] = fare
-      end
-
-      elem.xpath('.//BookItArgument[@Name="clickableURL"]').each do |elem|
-        link = elem['Value']
-        itinerary[:booking_link] = link
-      end
+      basefare = elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/BaseFare').first
+      dec = basefare['DecimalPlaces'].to_i
+      fare = basefare['Amount']
+      (1..dec).each { fare.chop! } 
+      itinerary[:base_fare] = fare
+      
+      totalfare = elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/TotalFare').first
+      dec = totalfare['DecimalPlaces'].to_i
+      fare = totalfare['Amount']
+      (1..dec).each { fare.chop! } 
+      itinerary[:total_fare] = fare
+      
+      link = elem.xpath('.//BookItArgument[@Name="clickableURL"]').first['Value']
+      itinerary[:booking_link] = link
       
       results << itinerary
     end
-    final = {'success'=>success, 'results'=>results}
+    final = {success:success, results:results}
     return final
   end
 end
