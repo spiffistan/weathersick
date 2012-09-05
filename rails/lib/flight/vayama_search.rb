@@ -1,4 +1,3 @@
-require 'Nokogiri'
 require 'time'
 require 'net/http'
 
