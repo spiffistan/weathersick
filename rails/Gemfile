@@ -40,7 +40,7 @@ gem 'nokogiri'
 gem 'rainbow'
 
 gem 'jquery-rails'
-gem 'spine-rails'
+gem 'backbone-on-rails'
   
 
 # To use ActiveModel has_secure_password

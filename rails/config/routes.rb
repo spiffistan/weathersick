@@ -5,6 +5,7 @@ Weathersick::Application.routes.draw do
   match '/search/flight' => 'home#flight_search'
   
   resources :places
+  resources :airports
 
   root to: 'home#index'
  

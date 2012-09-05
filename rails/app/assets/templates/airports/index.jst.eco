@@ -1,0 +1,6 @@
+<% for airport in @airports: %>
+  <div class="airport">
+    <%= airport.gps_code %>
+  </div>
+<% end %>
+

@@ -102,8 +102,8 @@ class Flight::VayamaSearch < Flight::Search
   def process_response(type, response)
     results = []
     doc = Nokogiri::XML(response.body)
-    #puts doc
     doc.remove_namespaces!
+
     success = doc.xpath('//OTA_AirLowFareSearchRS').first['EchoToken'] == "Error" ? false : true
     
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
@@ -143,13 +143,13 @@ class Flight::VayamaSearch < Flight::Search
       basefare = elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/BaseFare').first
       dec = basefare['DecimalPlaces'].to_i
       fare = basefare['Amount']
-      (1..dec).each { fare.chop! } 
+      1.upto(dec) { fare.chop! } 
       itinerary[:base_fare] = fare
       
       totalfare = elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/TotalFare').first
       dec = totalfare['DecimalPlaces'].to_i
       fare = totalfare['Amount']
-      (1..dec).each { fare.chop! } 
+      1.upto(dec) { fare.chop! } 
       itinerary[:total_fare] = fare
       
       link = elem.xpath('.//BookItArgument[@Name="clickableURL"]').first['Value']
@@ -157,7 +157,8 @@ class Flight::VayamaSearch < Flight::Search
       
       results << itinerary
     end
-    final = {success:success, results:results}
-    return final
+
+    return  { success: success, results: results }
+
   end
 end
