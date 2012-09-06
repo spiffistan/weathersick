@@ -8,6 +8,8 @@ $turquoise: rgb(14,239,235);
 $yellow: rgb(255,247,28);
 $orange: rgb(255,132,66);
 
+$bg: rgb(255,255,255);
+
 
 $black50: rgba(0,0,0,0.5);
 $shadow3: 0 0 5px;
@@ -16,7 +18,11 @@ $shadow7: 0 0 7px;
 $shadow9: 0 0 9px;
 
 body {
-  background: url('gplaypattern.png');
+  background-image: url('beach.jpg');
+  background-position: fixed center top;
+  background-repeat: no-repeat;
+  background-color: $bg;
+        background-size: 100%;
 }
 
 
@@ -35,7 +41,7 @@ body {
     font-family: 'Helvetica', sans-serif;
     text-align: center;
     font-size: 24px;
-    box-shadow: 0 0 5px $orange;
+    box-shadow: 0 0 20px $orange;
     border-radius: 10px;
     padding: 10px 10px;
     margin-top: 100px;
@@ -78,6 +84,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
         text-align: left;
         display: block;
         font-weight: bold;
+        text-shadow: -1px -1px 1px black;
       }
 
       input, select {
@@ -94,7 +101,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
       float: right;
       width: 100px;
       height: 60px;
-      font-size: 24px;
+      font-size: 32px;
       margin-left: 10px;
     }
 
@@ -138,9 +145,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
       }
       div.fare {
         position: relative;
-        top: 20px;
+        top: 22px;
+        letter-spacing: 2px;
         text-align: center;
         text-shadow: $shadow7 $yellow;
+        font-family: 'oleo script';
       }
 
       div.way {
