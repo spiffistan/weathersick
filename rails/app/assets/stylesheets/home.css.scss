@@ -133,7 +133,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', end
       background-image: url('price-paper.png');
       box-shadow: $shadow3 $magenta;
       color: white;
-        -webkit-transform: rotate(5deg);
+      border: 1px solid hsla(60, 80%, 55%, 0.6);
+     
+      -webkit-transform: rotate(5deg);
 
       div.from {
         position: relative;
