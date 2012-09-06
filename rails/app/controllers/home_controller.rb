@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class HomeController < ApplicationController
 
   include Flight
@@ -38,13 +40,19 @@ class HomeController < ApplicationController
 
   def flight_search
     # TODO Move this to somewhere else
-    params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
-    booker = Flight::VayamaSearch.new(nil, params)
-
-    @results = booker.search(Flight::VayamaSearch::SEARCH_OW, 'EWR', 'SFO', (DateTime.now >> 1), 1)
-
-    respond_with @results do |format|
-      format.json { render json: @results }
-    end
+#    params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
+#    booker = Flight::VayamaSearch.new(nil, params)
+#
+#    @results = booker.search(Flight::VayamaSearch::SEARCH_OW, 'EWR', 'SFO', (DateTime.now >> 1), 1)
+#
+#    respond_with @results do |format|
+#      format.json { render json: @results }
+#    end
+    # Development:
+   respond_to do |format|
+     format.json  { 
+       render json: open('http://localhost:3000/flight.json').read
+     }
+   end
   end
 end

@@ -1,0 +1,12 @@
+<% for flight in @flights: %>
+  <div class="flight search-result">
+    
+    <div class="price">
+        <div class="from">from</div>
+        <div class="fare">
+          $<%= flight.total_fare %>
+        </div>
+        <div class="way">one-way</div>
+    </div>
+  </div>
+<% end %>

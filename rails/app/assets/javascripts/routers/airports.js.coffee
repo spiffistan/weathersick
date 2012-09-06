@@ -8,7 +8,6 @@ class Weathersick.Routers.Airports extends Backbone.Router
 
     airports.fetch
       success: ->
-        console.log(airports.models)
         list = new Weathersick.Views.AirportsIndex(model: airports)
         list.render()
 

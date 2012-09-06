@@ -157,7 +157,7 @@ class Flight::VayamaSearch < Flight::Search
       results << itinerary
     end
 
-    return  { success: success, results: results }
+    return results # { success: success, results: results }
 
   end
 end

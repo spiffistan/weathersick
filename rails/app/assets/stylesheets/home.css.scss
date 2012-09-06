@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$cyan: rgb(22,252,172);
+$magenta: rgb(255,2,210);
+$turquoise: rgb(14,239,235);
+$yellow: rgb(255,247,28);
+$orange: rgb(255,132,66);
+
+
+$black50: rgba(0,0,0,0.5);
+$shadow3: 0 0 5px;
+$shadow5: 0 0 5px;
+$shadow7: 0 0 7px;
+$shadow9: 0 0 9px;
 
 body {
   background: url('gplaypattern.png');
@@ -39,7 +51,7 @@ body {
     background: linear-gradient(to bottom,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 );
 
-}
+  }
 
   #search-form {
     float: left;
@@ -80,20 +92,55 @@ body {
     }
   }
   .search-result {
+    position: relative;
     float: left;
-    width: 1000px;
+    width: 920px;
     padding: 20px 30px;
     margin-top: 20px;
     height: 100px;
-    background: #eee;
     font-size: 24px;
+    border-radius: 10px;
 
     .price {
-      float: right;
-      width: 200px;
+      position: absolute;
+      right: 10px;
+      left: 20px;
+      width: 100px;
       height: 100px;
-      margin: -20px;
-      background-color: pink;
+
+      font-size: 36px;
+      font-family: 'helvetica neue';
+      font-weight: 500;
+      border-radius: 50px;
+      background-color: $orange;
+      background-image: url('price-paper.png');
+      box-shadow: $shadow3 $magenta;
+      color: white;
+        -webkit-transform: rotate(5deg);
+
+      div.from {
+        position: relative;
+        font-size: 19px;
+        top: 10px;
+        text-align: center;
+        font-weight: 900;
+        color: rgba(0,0,0,0.3)
+      }
+      div.fare {
+        position: relative;
+        top: 20px;
+        text-align: center;
+        text-shadow: $shadow7 white;
+      }
+
+      div.way {
+        position: relative;
+        top: 30px;
+        font-size: 12px;
+        text-align: center;
+        font-weight: 900;
+        color: rgba(0,0,0,0.3)
+      }
     }
   }
 }

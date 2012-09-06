@@ -7,5 +7,5 @@ window.Weathersick =
 
 $(document).ready ->
   Weathersick.init()
-  Weathersick.airportsRouter = new Weathersick.Routers.Airports()
+  Weathersick.flightsRouter = new Weathersick.Routers.Flights()
   Backbone.history.start()
