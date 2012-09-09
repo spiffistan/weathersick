@@ -35,7 +35,7 @@ $shadow9: 0 0 9px;
 }
 
 body {
-  background-image: url('beach.jpg');
+  background-image: none;
   background-position: fixed center top;
   background-repeat: no-repeat;
   background-color: $bg;
@@ -55,7 +55,7 @@ body {
 
     margin: 0 auto;
     width: 960px;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Inconsolata', 'Courier', monospace;
     text-align: center;
     font-size: 24px;
     box-shadow: 0 0 20px $black50;
@@ -97,11 +97,22 @@ body {
       padding: 3px;
 
       label {
-        font-size: 14px;
+        font-size: 18px;
+        color: $turquoise;
         text-align: left;
         display: block;
-        font-weight: bold;
         text-shadow: -1px -1px 1px black;
+      }
+
+      input[type="text"] {
+        font-size: 18px;
+        background-color: transparent !important;
+        border: none !important;
+        border-radius: 0px !important;
+        color: $yellow;
+        padding: 3px 0;
+        border-bottom: 1px solid $yellow !important;
+        font-family: 'Inconsolata', 'Courier', monospace;
       }
 
       input, select {
