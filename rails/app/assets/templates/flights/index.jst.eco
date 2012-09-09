@@ -1,6 +1,17 @@
 <% for flight in @flights: %>
   <div class="flight search-result">
-    
+    <% i = 1 %>
+    <% for segment in flight.segments: %>
+      <% a = moment(new Date(segment.departure_datetime)) %>
+      <% b = moment(new Date(segment.arrival_datetime)) %>
+      <div></div>
+      <div class="segment">
+        Flight <%= i++ %>:
+        <%= segment.departure_code %>-<%= segment.arrival_code %> &nbsp;
+        <%= a.format('MMM Do hh:mm:ss') %> - <%= b.format('MMM Do hh:mm:ss') %> (<%= a.from(b, true) %>)
+      </div>
+    <% end %>
+    <a href="<%= flight.booking_link %>">
     <div class="price">
         <div class="from">from</div>
         <div class="fare">
@@ -8,5 +19,6 @@
         </div>
         <div class="way">one-way</div>
     </div>
+    </a>
   </div>
 <% end %>
