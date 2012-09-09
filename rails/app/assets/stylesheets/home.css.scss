@@ -125,26 +125,23 @@ body {
     #search-submit-container {
     }
   }
-  .search-result {
-    position: relative;
-    float: left;
+
+
+  .front {
     width: 920px;
     padding: 20px 30px;
-    margin-top: 20px;
     height: 100px;
     font-size: 24px;
     border-radius: 10px;
     @include gradient($cyan, darken($cyan, 2%));
     border-top: 3px solid darken($cyan, 10%);
+    border-bottom: 2px solid darken($cyan, 10%);
+
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
 
     box-shadow: $shadow3 $black50;
-
-    .segment {
-      font-size: 14px;
-      line-height: 14px;
-      font-family: "Inconsolata";
-
-    }
 
     .price {
       position: absolute;
@@ -192,5 +189,67 @@ body {
       }
     }
   }
+
+  .back {
+    -webkit-transform: rotateX(-180deg);
+    cursor: pointer;
+    position: absolute;
+    width: 920px;
+    padding: 20px 30px;
+    height: 100px;
+    font-size: 24px;
+    border-radius: 10px;
+    @include gradient(darken($cyan, 5%), darken($cyan, 9%));
+    border-top: 3px solid darken($cyan, 10%);
+    border-bottom: 2px solid darken($cyan, 10%);
+    box-shadow: $shadow3 $black50;
+
+   .segment {
+      font-size: 14px;
+      line-height: 14px;
+      font-family: "Inconsolata";
+    }
+
+
+  } 
+
+
 }
+
+  .search-results {
+    float: left;
+    margin-top: 50px;
+  }
+
+  .flip {
+    -webkit-perspective: 800;
+    height: 145px;
+    width: 980px;
+    margin-bottom: 20px;
+    float: left;
+    position: relative;
+  }
+
+  .flip .card.flipped {
+    -webkit-transform: rotateX(-180deg);
+  }
+
+  .flip .card {
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+    height: 145px;
+    width: 980px;
+    position: relative;
+  }
+
+  .flip .card .face {
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    z-index: 2;
+    
+  }
+  .flip .card .front {
+
+  }
+
 
