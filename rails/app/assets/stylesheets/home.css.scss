@@ -32,6 +32,17 @@ $shadow9: 0 0 9px;
   background-image: -o-linear-gradient($from, $to);
 }
 
+@font-face {
+    font-family: 'MeteoconsRegular';
+    src: asset-url('fonts/meteocons/meteocons-webfont.eot', 'fonts');
+    src: asset-url('fonts/meteocons/meteocons-webfont.eot?#iefix', 'fonts') format('embedded-opentype'),
+         asset-url('fonts/meteocons/meteocons-webfont.woff', 'fonts') format('woff'),
+         asset-url('meteocons-webfont.ttf', 'fonts') format('truetype'),
+         asset-url('fonts/meteocons/meteocons-webfont.svg#MeteoconsRegular', 'fonts') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $bg: #333;
 
 
@@ -41,6 +52,7 @@ body {
   height: 100%;
   padding-top: 30px;
   padding: 0;
+  
 
   div.clouds {
     position: fixed;
@@ -70,9 +82,8 @@ body {
 
     margin: 0 auto;
     width: 960px;
-    font-family: 'Inconsolata', 'Courier', monospace;
+    font-family: 'oleo script', 'Inconsolata', 'Courier', monospace;
     text-align: center;
-    font-size: 24px;
     box-shadow: 0 0 20px $black50;
     border-radius: 10px;
     padding: 10px 10px;
@@ -105,6 +116,7 @@ body {
     float: left;
     margin-bottom: 0px;
     width: 960px;
+    -webkit-font-smoothing: subpixel-antialiased;
 
     .search-part {
 
@@ -112,7 +124,7 @@ body {
       padding: 3px;
 
       label {
-        font-size: 18px;
+        font-size: 24px;
         color: $turquoise;
         text-align: left;
         display: block;
@@ -137,20 +149,15 @@ body {
       }
 
       .weather {
-        font-size: 14px;
+        font-size: 28px;
+        font-family: 'MeteoconsRegular';
         line-height: 28px;
         cursor: pointer;
 
         span {
           color: $yellow;
-          border-bottom: 1px solid $yellow;
-          padding-bottom: 5px;
-
         }
-
-
       }
-
     }
 
     .search-part:not(:first-child)  {

@@ -66,12 +66,16 @@ module Weathersick
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     config.generators do |g|
        g.orm             :mongo_mapper
        g.template_engine :erb
        g.test_framework  :rspec
      end
+  
   end
+
 end
 
