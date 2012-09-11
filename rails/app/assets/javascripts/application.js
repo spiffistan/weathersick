@@ -10,12 +10,17 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require moment.min
+// require moment
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
-//= require underscore
+//= require lib/underscore
+//= require lib/moment
+//= require lib/ThreeWebGL
+//= require lib/ThreeExtras
+//= require lib/Detector
+//= require lib/RequestAnimationFrame
 //= require backbone
 //= require weathersick
 //= require home
