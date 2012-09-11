@@ -113,12 +113,29 @@ body {
         padding: 3px 0;
         border-bottom: 1px solid $yellow !important;
         font-family: 'Inconsolata', 'Courier', monospace;
+        box-shadow: none !important;
       }
 
       input, select {
         margin-bottom: 0px;
-        outline: none;
+        outline: none !important;
       }
+
+      .weather {
+        font-size: 14px;
+        line-height: 28px;
+        cursor: pointer;
+
+        span {
+          color: $yellow;
+          border-bottom: 1px solid $yellow;
+          padding-bottom: 5px;
+
+        }
+
+
+      }
+
     }
 
     .search-part:not(:first-child)  {
@@ -139,13 +156,15 @@ body {
 
 
   .front {
-    width: 920px;
+    width: 918px;
     padding: 20px 30px;
     height: 100px;
     font-size: 24px;
     border-radius: 10px;
     @include gradient($cyan, darken($cyan, 2%));
     border-top: 3px solid darken($cyan, 10%);
+    border-left: 1px solid darken($cyan, 5%); 
+    border-right: 1px solid darken($cyan, 5%); 
     border-bottom: 2px solid darken($cyan, 10%);
 
     position: absolute;
