@@ -5,7 +5,12 @@ var databaseUrl = "admin:SorlandsCh1ps@weathersick-capasit-db-0.dotcloud.com:343
 var collections = ["wstations", "raw_weathers"];
 var db = require("mongojs").connect(databaseUrl, collections);
 var stations = [];
-db.wstations.find(function(err, doc) { 
+
+// The script assumes that raw_weathers is a collection of _remaining_ stations.
+// We move from wstations to this, move to raw_weather_cache when things get slow.
+// Then we remove those objects from raw_weathers so just the remaining codes are there.
+
+db.raw_weathers.find({planner01010107:{$exists:false}}, function(err, doc) { 
   stations.push(doc);
 });
 var uri = "http://api.wunderground.com/api/eebf95c61da19812/planner_";
@@ -19,9 +24,12 @@ var cons = function(name, value) {
 }
 
 function setup () {
+
+console.log(stations[0].length)
   
+
 stations = stations[0];
-http.globalAgent.maxSockets = 5;
+http.globalAgent.maxSockets = 7;
 
 for (i = 1; i<=365;i=i+7) {
   if (i >= 365) { break }
@@ -62,38 +70,42 @@ function fetch() {
   var i = 0;
 stations.forEach( function(station) {
   //console.log("In station.");
-  if (station.code !== undefined) {
+  if (station.station !== undefined) {
     //console.log("Not undefined.");
     kaplow.forEach(function(date) {
       //console.log("Now in " + uri + date + '/q/' + station.code + ".json, fetching");
-      http.get(uri + date + '/q/' + station.code + ".json", function(res) { 
+      http.get(uri + date + '/q/' + station.station + ".json", function(res) { 
         res.setEncoding('utf-8'); 
         //console.log("HTTP started");
         var output = '';
         var doc = {};
+        var objname = '';
         res.on('data', function(chunk) {
           output += chunk;
         });
         res.on('end', function() {
-          var objname = "planner_" + date.toString();
+          i++;
+          if (i != 0 && i % 100 == 0) { console.log("Got " + i.toString()); }
+          objname = "planner" + date.toString();
           try {
             doc = cons(objname, JSON.parse(output));
           } catch(err) {
-            console.log("Error in " + station.code + " " + objname + ", " + err);
+            console.log("Error in " + station.station + " " + objname + ", " + err);
           }
-        });
-          db.raw_weathers.update({"station":station.code},{$set:doc}, function(err) {
+          db.raw_weathers.update({"station":station.station},{$set:doc}, function(err) {
             
           });
+        });
+           
         }).on('error', function(e) {
-          console.log("Got error: " + e.message);
+          console.log("Got error in " + station.station + " " + date + " : " + e.message);
       });
     });
-    i++;
-     if (i % 100 == 0) { console.log("Got 100"); }
+    
+     
     } else { console.log ("Undefined"); }
   }); 
 };
 //process.exit(1);
 
-setTimeout(function () { setup() }, 3000);
+setTimeout(function () { setup() }, 5000);
