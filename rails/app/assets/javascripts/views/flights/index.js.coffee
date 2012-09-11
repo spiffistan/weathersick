@@ -7,6 +7,5 @@ class Weathersick.Views.FlightsIndex extends Backbone.View
     @render
 
   render: ->
-    console.log(@model.toJSON())
-    $(@container).html(@template(flights: @model.toJSON()))
-    this
+    content = @template(flights: @model.toJSON())
+    $(@container).hide().html(content).fadeIn(300)

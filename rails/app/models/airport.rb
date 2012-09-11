@@ -25,38 +25,45 @@ class Airport
 
   ensure_index [[:loc, '2d']]
 
-  def self.nearest(location)
-    where(loc: {"$near" => location}).limit(1).first
-  end
+  class << self
+    def nearest(location)
+      where(loc: {"$near" => location}).limit(1).first
+    end
 
-  def self.near(location)
-    where(loc: {"$near" => location})
-  end
+    def near(location)
+      where(loc: {"$near" => location})
+    end
 
-  def self.has_iata
-    where({iata_code: {"$ne" => "" }})
-  end
-  
-  def self.has_icao
-    where({gps_code: {"$ne" => "" }})
-  end
+    def has_iata
+      where({iata_code: {"$ne" => "" }})
+    end
+    
+    def has_icao
+      where({gps_code: {"$ne" => "" }})
+    end
 
-  def self.is_serviced
-    where(scheduled_service: "yes")
-  end
+    def is_serviced
+      where(scheduled_service: "yes")
+    end
 
-  def self.in_use
-    where(in_use: true)
-  end
+    def in_use
+      where(in_use: true)
+    end
 
-  def self.has_historical_weather
-    where(historical_weather_months: { "$exists" => true })
-  end
-  
-  def self.no_historical_weather
-    where(historical_weather_months: { "$exists" => false })
-  end
+    def search_name_iata(text)
+      regex = /.*#{text}.*/i
 
+      where({"$or" => [{name: regex}, {iata_code: regex}]})
+    end
+
+    def has_historical_weather
+      where(historical_weather_months: { "$exists" => true })
+    end
+    
+    def no_historical_weather
+      where(historical_weather_months: { "$exists" => false })
+    end
+  end
 end
 
 class HistoricalWeather

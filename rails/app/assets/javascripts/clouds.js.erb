@@ -23,8 +23,7 @@ context.fillRect(0, 0, canvas.width, canvas.height);
 // Clouds
 
 var container;
-var camera, scene, renderer, sky, mesh, geometry, material,
-i, h, color, colors = [], sprite, size, x, y, z;
+var camera, scene, renderer, sky, mesh, geometry, material, i, h, color, colors = [], sprite, size, x, y, z;
 
 var mouseX = 0, mouseY = 0;
 var start_time = new Date().getTime();
@@ -125,7 +124,7 @@ function animate() {
 
 function render() {
 
-  position = ( ( new Date().getTime() - start_time ) * 0.03 ) % 8000;
+  position = ( ( new Date().getTime() - start_time ) * window.cloudSpeed ) % 8000;
 
   camera.position.x += ( mouseX - camera.target.position.x ) * 0.01;
   camera.position.y += ( - mouseY - camera.target.position.y ) * 0.01;

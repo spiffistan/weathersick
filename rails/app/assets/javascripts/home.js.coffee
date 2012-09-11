@@ -10,3 +10,9 @@ $ ->
   $('.flip').live 'click', (event) ->
     $(this).find('.card').addClass('flipped').mouseleave ->
       $(this).removeClass('flipped');
+
+#
+# $('#search-submit').live 'click', (event) ->
+#   $('#logo').fadeOut(100)
+#   $('#search-container').animate(top: 100, 300)
+#   accelerateClouds(1, 0.5)
