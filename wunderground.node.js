@@ -1,4 +1,5 @@
 var http = require('http');
+var fs = require('fs');
 
 var databaseUrl = "admin:SorlandsCh1ps@weathersick-capasit-db-0.dotcloud.com:34301/weathersick";
 var collections = ["wstations", "raw_weathers"];
@@ -20,7 +21,7 @@ var cons = function(name, value) {
 function setup () {
   
 stations = stations[0];
-http.globalAgent.maxSockets = 20;
+http.globalAgent.maxSockets = 5;
 
 for (i = 1; i<=365;i=i+7) {
   if (i >= 365) { break }
@@ -58,6 +59,7 @@ console.log("Initializing data import");
 setTimeout(function() { fetch() }, 2000);
 }
 function fetch() {
+  var i = 0;
 stations.forEach( function(station) {
   //console.log("In station.");
   if (station.code !== undefined) {
@@ -67,87 +69,31 @@ stations.forEach( function(station) {
       http.get(uri + date + '/q/' + station.code + ".json", function(res) { 
         res.setEncoding('utf-8'); 
         //console.log("HTTP started");
+        var output = '';
+        var doc = {};
         res.on('data', function(chunk) {
-          var objname = "planner" + date.toString();
-          //console.log(objname);
+          output += chunk;
+        });
+        res.on('end', function() {
+          var objname = "planner_" + date.toString();
           try {
-            doc = cons(objname, JSON.parse(JSON.minify(chunk)));
+            doc = cons(objname, JSON.parse(output));
           } catch(err) {
-            console.log("Error in " + station.code + ", " + err)
+            console.log("Error in " + station.code + " " + objname + ", " + err);
           }
-          try {
+        });
           db.raw_weathers.update({"station":station.code},{$set:doc}, function(err) {
             
           });
-        } catch (err) {
-          console.log("Error in " + station.code + " " + objname + ", " + err)
-        }
-          //console.log("Got it.");
         }).on('error', function(e) {
           console.log("Got error: " + e.message);
       });
     });
-    });
-  } else { console.log ("Undefined"); }
-});
+    i++;
+     if (i % 100 == 0) { console.log("Got 100"); }
+    } else { console.log ("Undefined"); }
+  }); 
+};
 //process.exit(1);
 
-};
-setTimeout(function () { setup() }, 5000);
-
-(function(global){
-	if (typeof global.JSON == "undefined" || !global.JSON) {
-		global.JSON = {};
-	}
-
-	global.JSON.minify = function(json) {
-
-		var tokenizer = /"|(\/\*)|(\*\/)|(\/\/)|\n|\r/g,
-			in_string = false,
-			in_multiline_comment = false,
-			in_singleline_comment = false,
-			tmp, tmp2, new_str = [], ns = 0, from = 0, lc, rc
-		;
-
-		tokenizer.lastIndex = 0;
-
-		while (tmp = tokenizer.exec(json)) {
-			lc = RegExp.leftContext;
-			rc = RegExp.rightContext;
-			if (!in_multiline_comment && !in_singleline_comment) {
-				tmp2 = lc.substring(from);
-				if (!in_string) {
-					tmp2 = tmp2.replace(/(\n|\r|\s)*/g,"");
-				}
-				new_str[ns++] = tmp2;
-			}
-			from = tokenizer.lastIndex;
-
-			if (tmp[0] == "\"" && !in_multiline_comment && !in_singleline_comment) {
-				tmp2 = lc.match(/(\\)*$/);
-				if (!in_string || !tmp2 || (tmp2[0].length % 2) == 0) {	// start of string with ", or unescaped " character found to end string
-					in_string = !in_string;
-				}
-				from--; // include " character in next catch
-				rc = json.substring(from);
-			}
-			else if (tmp[0] == "/*" && !in_string && !in_multiline_comment && !in_singleline_comment) {
-				in_multiline_comment = true;
-			}
-			else if (tmp[0] == "*/" && !in_string && in_multiline_comment && !in_singleline_comment) {
-				in_multiline_comment = false;
-			}
-			else if (tmp[0] == "//" && !in_string && !in_multiline_comment && !in_singleline_comment) {
-				in_singleline_comment = true;
-			}
-			else if ((tmp[0] == "\n" || tmp[0] == "\r") && !in_string && !in_multiline_comment && in_singleline_comment) {
-				in_singleline_comment = false;
-			}
-			else if (!in_multiline_comment && !in_singleline_comment && !(/\n|\r|\s/.test(tmp[0]))) {
-				new_str[ns++] = tmp[0];
-			}
-		}
-		new_str[ns++] = rc;
-		return new_str.join("");
-	};
-})(this);
+setTimeout(function () { setup() }, 3000);
