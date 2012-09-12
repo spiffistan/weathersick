@@ -1,0 +1,13 @@
+<% for city in @cities: %>
+<div class="flip">
+  <div class="city search-result card">
+    <div class="front face"> 
+    <h3><%= city.city_name %>, <%= city.province_name %>, <%= city.country_name %></h3>
+    </div>
+
+    <div class="back face">
+    </div>
+
+  </div>
+</div>
+<% end %>

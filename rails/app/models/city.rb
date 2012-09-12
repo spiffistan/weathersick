@@ -1,15 +1,15 @@
-class Place
+class City
   include MongoMapper::Document
 
-  key :country_code, String
-  key :name, String
-  key :asciiname, String
-  key :population, Integer
-  key :elevation, Integer
-  key :modification_date, String
-  key :timezone, String
+  key :city_name, String
+  key :province_name, String
+  key :country_name, String
+  key :wstation_code, String
+
+  key :city_rank, Float
 
   key :loc, Array
+  key :sphereloc, Array
 
   ensure_index [[:loc, '2d']]
 

@@ -5,13 +5,13 @@ class Weathersick.Views.HomeIndex extends Backbone.View
   initialize: ->
 
   events:
-    'click #search-submit': 'fetchFlights'
+    'click #search-submit': 'randomCities'
 
-  fetchFlights: ->
+  randomCities: ->
     $('#logo').fadeOut(100)
     accelerateClouds(1, 0.2)
     $('#search-container').animate(top: 100, 500, ->
-      Weathersick.flightsRouter.list()
+      Weathersick.citiesRouter.list()
       # TODO decelerate
       window.cloudSpeed = 0.01
     )

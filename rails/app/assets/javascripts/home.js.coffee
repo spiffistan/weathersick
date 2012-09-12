@@ -11,14 +11,7 @@ $ ->
     $(this).find('.card').addClass('flipped').mouseleave ->
       $(this).removeClass('flipped');
 
-  processAirports: (airports) ->
-    names = []
-    $.each airports, ->
-      names.add(this.name)
-    names
-
   $('.typeahead').typeahead 
     source: (query, process) ->
       $.get '/airports/typeahead.json', query: query, (data) ->
-        console.log(data)
         process(data)

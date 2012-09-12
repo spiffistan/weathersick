@@ -9,6 +9,6 @@ $(document).ready ->
   Weathersick.init()
   vent = _.extend({}, Backbone.Events);
   Weathersick.homeIndex = new Weathersick.Views.HomeIndex()
-  Weathersick.flightsIndex = new Weathersick.Views.FlightsIndex()
-  Weathersick.flightsRouter = new Weathersick.Routers.Flights()
+  Weathersick.citiesIndex = new Weathersick.Views.CitiesIndex()
+  Weathersick.citiesRouter = new Weathersick.Routers.Cities()
   Backbone.history.start()
