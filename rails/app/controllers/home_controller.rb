@@ -18,11 +18,10 @@ class HomeController < ApplicationController
     range = (params[:range_start].to_i..params[:range_end].to_i)
 
     list = HistoricalWeather.where({"$and" => [ chance_temp_over_32: { "$gte" => 80 }, week: { "$in" => range.to_a } ]}).all.collect {|it| it.station }
-    list.select! { |it| list.count(it) == range.to_a.size }
+    good = list.select { |it| list.count(it) == range.to_a.size }
+    good.uniq!
 
-    puts list.inspect
-
-    respond_with list
+    respond_with good
   end
 
   def flight_search
