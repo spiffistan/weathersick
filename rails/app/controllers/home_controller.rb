@@ -17,9 +17,20 @@ class HomeController < ApplicationController
 
     range = (17..18) # (params[:range_start].to_i..params[:range_end].to_i)
 
-    list = HistoricalWeather.where({"$and" => [ chance_temp_over_32: { "$gte" => 30.0 }, week: { "$in" => range.to_a } ]}).all.collect {|it| it.station }
+    q = { 
+      "$and" => [ 
+         chance_sunny_cloudy_day: { "$gte" => 20 }, 
+         "$or" => [
+           chance_temp_16_32: { "$gte" => 25 }, 
+           chance_temp_over_32: { "$gte" => 15 }
+         ],
+         week: { "$in" => range.to_a } 
+      ]
+    }
+
+    list = HistoricalWeather.where(q).all.collect {|it| it.station }
     good = list.select { |it| list.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}, city_rank: { "$gt" => 500 }]}).all.sample(5)
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}, city_rank: { "$gt" => 300 }]}).all.sample(5)
 
     respond_with cities
   end

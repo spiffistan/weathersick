@@ -11,7 +11,7 @@ class City
   key :loc, Array
   key :sphereloc, Array
 
-  ensure_index [[:loc, '2d']]
+  ensure_index [[:sphereloc, '2d']]
 
   def self.nearest(location)
     where(loc: {"$near" => location}).limit(1).first
