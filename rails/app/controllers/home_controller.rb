@@ -15,11 +15,11 @@ class HomeController < ApplicationController
 
   def nice_weather
 
-    range = (8..9) # (params[:range_start].to_i..params[:range_end].to_i)
+    range = (17..18) # (params[:range_start].to_i..params[:range_end].to_i)
 
-    list = HistoricalWeather.where({"$and" => [ chance_temp_over_32: { "$gte" => 30 }, week: { "$in" => range.to_a } ]}).all.collect {|it| it.station }
+    list = HistoricalWeather.where({"$and" => [ chance_temp_over_32: { "$gte" => 30.0 }, week: { "$in" => range.to_a } ]}).all.collect {|it| it.station }
     good = list.select { |it| list.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}, city_rank: { "$gt" => 500 }]}).all.sample(3)
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}, city_rank: { "$gt" => 500 }]}).all.sample(5)
 
     respond_with cities
   end

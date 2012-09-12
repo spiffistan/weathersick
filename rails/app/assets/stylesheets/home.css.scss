@@ -80,6 +80,14 @@ body {
 #home-container {
   width: 100%;  
 
+  #spinner {
+    position: absolute;
+    top: 25%;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    display: none;
+  }
 
   #logo {
     position: absolute; 

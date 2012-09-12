@@ -8,6 +8,7 @@ class Weathersick.Routers.Cities extends Backbone.Router
 
     cities.fetch
       success: ->
+        $('#spinner').fadeOut(300)
         list = new Weathersick.Views.CitiesIndex(model: cities)
         list.render()
 

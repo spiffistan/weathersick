@@ -17,6 +17,7 @@
 //= require bootstrap-datepicker
 //= require lib/underscore
 //= require lib/moment
+//= require lib/spin
 //= require lib/ThreeWebGL
 //= require lib/ThreeExtras
 //= require lib/Detector
