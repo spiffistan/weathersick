@@ -18,8 +18,16 @@
       if(window.cloudSpeed >= v)
         done = true
       if(!done) {
-        // console.log(window.cloudSpeed);
         setTimeout(function() { accelerateClouds(t+1, v) }, 10);
+      }
+    }
+
+    function decelerateClouds(t, v) {
+      window.cloudSpeed = -easeInQuad(t);
+      if(window.cloudSpeed <= v)
+        done = true
+      if(!done) {
+        setTimeout(function() { decelerateClouds(t+1, v) }, 10);
       }
     }
   </script>

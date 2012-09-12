@@ -19,4 +19,16 @@ class AirportsController < ApplicationController
 
     respond_with @airports
   end
+
+  def search
+    @airports = Airport.search_name_iata(params[:query]).limit(10)
+
+    respond_with @airports
+  end
+
+  def typeahead
+    @airports = Airport.search_name_iata(params[:query]).limit(10).all.collect! {|airport| airport.name }
+
+    respond_with @airports
+  end
 end

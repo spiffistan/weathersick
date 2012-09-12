@@ -11,8 +11,14 @@ $ ->
     $(this).find('.card').addClass('flipped').mouseleave ->
       $(this).removeClass('flipped');
 
-#
-# $('#search-submit').live 'click', (event) ->
-#   $('#logo').fadeOut(100)
-#   $('#search-container').animate(top: 100, 300)
-#   accelerateClouds(1, 0.5)
+  processAirports: (airports) ->
+    names = []
+    $.each airports, ->
+      names.add(this.name)
+    names
+
+  $('.typeahead').typeahead 
+    source: (query, process) ->
+      $.get '/airports/typeahead.json', query: query, (data) ->
+        console.log(data)
+        process(data)

@@ -26,7 +26,7 @@ $shadow9: 0 0 9px;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
 
   /* Safari 5.1+, Chrome 10+ */
-  background-image: -webkit-linear-gradient($from, $to);
+  background-image: -webkit-linear-gradient($from 0%, $to 50%);
 
   /* Opera 11.10+ */
   background-image: -o-linear-gradient($from, $to);
@@ -51,16 +51,19 @@ body {
   width: 100%;
   height: 100%;
   padding: 0;
-  
 
   div.clouds {
     position: fixed;
     width: 100%;
     height: 100%;
     z-index: -1;
+    display: none;
 
     canvas {
-      @include gradient(#1e4877, #4584b4);
+      // TODO better mixin
+      background-image: -webkit-linear-gradient(#1e4877 0%, #4584b4 50%);
+      // background-image: -webkit-radial-gradient(10% 30%, #1e4877, #4584b4);
+      
       position: fixed;
       width: 100%;
       height: 100%;
@@ -86,7 +89,7 @@ body {
     font-family: 'oleo script';
     font-size: 96px;
     text-shadow: 0 0 20px white;
-    color: lighten($yellow, 40%);
+    color: white;
     text-align: center;
   }
 
@@ -120,14 +123,7 @@ body {
 //    background: linear-gradient(to bottom,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%);
 //    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 );
 
-    background: #45484d;
-    background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000));
-    background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%);
-    background: -o-linear-gradient(top,  #45484d 0%,#000000 100%);
-    background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%);
-    background: linear-gradient(to bottom,  #45484d 0%,#000000 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+    @include gradient(#383838, #000000);
 
 }
 
@@ -194,11 +190,11 @@ body {
     }
 
     #search-submit {
-      float: right;
+      position: absolute;
+      right: 10px;
       width: 130px;
       height: 80px;
       font-size: 45px;
-      margin-left: 10px;
       font-family: 'oleo script';
     }
 

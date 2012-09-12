@@ -19,6 +19,7 @@ context.fillStyle = gradient;
 context.fillRect(0, 0, canvas.width, canvas.height);
 
 // document.body.style.background = 'url(' + canvas.toDataURL('image/png') + ')';
+//$('canvas').css('background', 'url(' + canvas.toDataURL('image/png') + ')');
 
 // Clouds
 
@@ -95,7 +96,10 @@ function init() {
   container.appendChild( renderer.domElement );
 
   // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+  document.addEventListener( 'scroll', onScroll, false );
   window.addEventListener( 'resize', onWindowResize, false );
+
+  $('div.clouds').fadeIn(200);
 
 }
 
@@ -103,6 +107,19 @@ function onDocumentMouseMove( event ) {
 
   mouseX = ( event.clientX - windowHalfX ) * 0.25;
   mouseY = ( event.clientY - windowHalfY ) * 0.15;
+
+}
+
+var scrollAmount, scrollPercent, documentHeight;
+
+function onScroll( event ) {
+
+  scrollAmount = $(window).scrollTop();
+  documentHeight = $(document).height();
+  scrollPercent = (scrollAmount / documentHeight);
+
+  // mouseX = ( event.clientX - windowHalfX ) * 0.25;
+  mouseY = ((documentHeight * scrollPercent)) * 0.005;
 
 }
 
@@ -124,7 +141,7 @@ function animate() {
 
 function render() {
 
-  position = ( ( new Date().getTime() - start_time ) * window.cloudSpeed ) % 8000;
+  position = ( ( new Date().getTime() - start_time ) * 0.03 ) % 8000;
 
   camera.position.x += ( mouseX - camera.target.position.x ) * 0.01;
   camera.position.y += ( - mouseY - camera.target.position.y ) * 0.01;
