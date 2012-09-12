@@ -13,29 +13,16 @@ class HomeController < ApplicationController
   
   end
 
-  def nice_near
+  def nice_weather
 
-    # TODO XXX refactor into separate helper method for checking params?
-    return if params[:location].blank? || params[:weather].blank? || params[:days].blank?
+    range = (params[:range_start].to_i..params[:range_end].to_i)
 
-    loc = params[:location].split(',')
+    list = HistoricalWeather.where({"$and" => [ chance_temp_over_32: { "$gte" => 80 }, week: { "$in" => range.to_a } ]}).all.collect {|it| it.station }
+    list.select! { |it| list.count(it) == range.to_a.size }
 
-    days = params[:days]
-    
-    weather_type = String.new
+    puts list.inspect
 
-    case params[:weather]
-    when 'sunny'
-      weather_type = 'Clear'
-    end
-
-    weather = Weather.range_with_weather(days, days, weather_type).first.observation_location.loc
-    @places = Place.near(weather).limit(5)
-
-    respond_with @places do |format|
-      format.json { render json: @places }
-    end
-
+    respond_with list
   end
 
   def flight_search
