@@ -11,7 +11,7 @@ class HistoricalWeather
   
   ensure_index [[:sphereloc, '2d']]
   
-  key :cloud_cover, String
+  key :cloud_cover, String # Good: "mostly sunny", "sunny", "cloudy"
 
   key :high_min_c, Integer
   key :high_avg_c, Integer
@@ -66,6 +66,9 @@ class HistoricalWeather
   key :chance_tornado_day, Integer
   key :chance_windy_day, Integer
   key :chance_sunny_cloudy_day, Integer
-
+  
+  key :chance_partly_or_sunny, Integer
+  key :chance_hightemp, Integer
+  key :chance_crappy, Integer
 end
 
