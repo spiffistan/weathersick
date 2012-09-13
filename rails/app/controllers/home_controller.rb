@@ -12,26 +12,35 @@ class HomeController < ApplicationController
     @date_to = ((DateTime.now >> 1).to_date + 3.days).strftime('%d/%m/%Y')
   
   end
-
+2
   def nice_weather
 
-    range = (17..18) # (params[:range_start].to_i..params[:range_end].to_i)
+    range = (48..49) # (params[:range_start].to_i..params[:range_end].to_i)
 
     q = { 
       "$and" => [ 
-         chance_sunny_cloudy_day: { "$gte" => 20 }, 
-         "$or" => [
-           chance_temp_16_32: { "$gte" => 25 }, 
-           chance_temp_over_32: { "$gte" => 15 }
-         ],
-         week: { "$in" => range.to_a } 
+        chance_partly_or_sunny: { "$gte" => 80 }, 
+        chance_hightemp: { "$gte" => 80 }, 
+        chance_crappy: { "$lte" => 20 }, 
+        week: { "$in" => range.to_a } 
       ]
     }
 
-    list = HistoricalWeather.where(q).all.collect {|it| it.station }
-    good = list.select { |it| list.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}, city_rank: { "$gt" => 300 }]}).all.sample(5)
-
+    list = HistoricalWeather.where(q).fields(
+      station:1,chance_partly_or_sunny:1,chance_hightemp:1,chance_shitty:1,high_avg_c:1,week:1
+    ).all
+    stations = list.collect {|it| it.station }
+    good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).all.take(5).to_ary
+    
+    cities.each do |city|
+      city.weather = []
+      w = list.select { |element| element.station == city.wstation_code }
+      w.each do |we|
+        city.weather.push(we)
+      end
+    end
+    
     respond_with cities
   end
 
