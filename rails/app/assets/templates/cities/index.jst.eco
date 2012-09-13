@@ -2,7 +2,26 @@
 <div class="flip">
   <div class="city search-result card">
     <div class="front face"> 
-    <h3><%= city.city_name %>, <%= city.province_name %>, <%= city.country_name %></h3>
+      <div class="city-info">
+        <div class="city-name"><%= city.city_name %></div>
+        <div class="province-country-name"><%= city.province_name %>, <%= city.country_name %></div>
+      </div>
+      <div class="city-weather">
+        <table>
+          <tr class="city-weather-row">
+            <td>1</td><td>82%</td>
+          </tr>
+          <tr class="city-weather-row">
+            <td>2</td><td>22%</td>
+          </tr>
+          <tr class="city-weather-row">
+            <td>3</td><td>73%</td>
+          </tr>
+          <tr class="city-weather-row">
+            <td>4</td><td>19%</td>
+          </tr>
+        </table>
+      </div>
     </div>
 
     <div class="back face">
