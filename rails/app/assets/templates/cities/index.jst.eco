@@ -3,6 +3,7 @@
   <div class="city search-result card">
     <div class="front face"> 
     <h3><%= city.city_name %>, <%= city.province_name %>, <%= city.country_name %></h3>
+		<h2><%= city.city_rank %></h2>
     </div>
 
     <div class="back face">
