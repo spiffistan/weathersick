@@ -8,12 +8,14 @@ $cyan: rgb(14,239,235);
 $yellow: rgb(255,247,28);
 $orange: rgb(255,132,66);
 
-
 $black50: rgba(0,0,0,0.5);
 $shadow3: 0 0 5px;
 $shadow5: 0 0 5px;
 $shadow7: 0 0 7px;
 $shadow9: 0 0 9px;
+
+$font-script: 'Oleo Script', 'Georiga', 'Times new roman', serif;
+$font-head: 'Cabin Condensed', 'Helvetica', 'Arial', sans-serif;
 
 @mixin gradient($from, $to) {
   /* fallback/image non-cover color */
@@ -109,7 +111,7 @@ body {
 
     margin: 0 auto;
     width: 956px;
-    font-family: 'oleo script', 'Inconsolata', 'Courier', monospace;
+    font-family: $font-script;
     text-align: center;
     box-shadow: 0 0 20px $black50;
     border-radius: 10px;
@@ -212,8 +214,8 @@ body {
 
 
   .front {
-    width: 918px;
-    padding: 20px 30px;
+    width: 938px;
+    padding: 20px;
     height: 100px;
     font-size: 24px;
     border-radius: 10px;
@@ -351,13 +353,14 @@ body {
   float: left;
 
   .city-name {
-    font-family: 'Helvetica';
+    font-family: $font-head;
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 5px;
   }
 
   .province-country-name {
-    font-family: 'Helvetica';
+    font-family: $font-head;
     font-size: 14px;
   }
 
@@ -372,21 +375,25 @@ body {
 
   float: left;
 
-  table {
-    width: 100px;
-  }
-
   .city-weather-row {
 
     font-size: 20px;
     color: darken($cyan, 20%);
 
     td {
-      padding: 5px 0;
+      text-align: center;
+      vertical-align: middle;
+      height: 25px;
+      padding: 3px 5px;
     }
+
     td:first-child {
-      font-family: 'MeteoconsRegular';
-      font-size: 25px;
+      font-family: $font-script;
+      
+      span {
+        font-family: 'MeteoconsRegular';
+        font-size: 25px;
+    }
     }
   }
 }

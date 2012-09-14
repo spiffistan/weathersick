@@ -9,18 +9,25 @@
       <div class="city-weather">
         <table>
           <tr class="city-weather-row">
-            <td>1</td><td>82%</td>
+            <td><span>1</span></td><td>82%</td>
           </tr>
           <tr class="city-weather-row">
-            <td>2</td><td>22%</td>
+            <td><span>3<span></td><td>22%</td>
           </tr>
           <tr class="city-weather-row">
-            <td>3</td><td>73%</td>
+            <td>hot</td><td>73%</td>
           </tr>
           <tr class="city-weather-row">
-            <td>4</td><td>19%</td>
+            <td>warm</td><td>19%</td>
           </tr>
         </table>
+        <div class="price">
+          <div class="from">from</div>
+          <div class="fare">
+            $<%= Math.floor(Math.random() * 500) + 100 %>
+          </div>
+          <div class="way">one-way</div>
+        </div>
       </div>
     </div>
 
