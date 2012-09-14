@@ -31,13 +31,13 @@ class HomeController < ApplicationController
     ).all
     stations = list.collect {|it| it.station }
     good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).all.take(5).to_ary
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).all.take(5)
     
     cities.each do |city|
-      city.weather = []
+      city.weather = {}
       w = list.select { |element| element.station == city.wstation_code }
       w.each do |we|
-        city.weather.push(we)
+        city.weather["week" + we.week.to_i.to_s] = we
       end
     end
     
