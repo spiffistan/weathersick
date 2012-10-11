@@ -12,6 +12,13 @@ $ ->
       $(this).removeClass('flipped');
 
   $('.typeahead').typeahead 
-    source: (query, process) ->
-      $.get '/airports/typeahead.json', query: query, (data) ->
-        process(data)
+    ajax: '/airports/typeahead.json'
+    method: 'get'
+    itemSelected: (item, val, text) ->
+      $('.typeahead').val(val)
+#    source: (query, process) ->
+#      $.get '/airports/typeahead.json', query: query, (data) ->
+#        names = (item.name for item in data)
+#        process(names)
+#    onselect: (obj) ->
+#      $('.typeahead').val(obj.iata_code)

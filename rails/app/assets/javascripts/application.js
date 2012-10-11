@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require bootstrap-datepicker
+//= require lib/bootstrap-typeahead
 //= require lib/underscore
 //= require lib/moment
 //= require lib/spin

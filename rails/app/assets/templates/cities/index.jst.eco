@@ -9,16 +9,16 @@
       <div class="city-weather">
         <table>
           <tr class="city-weather-row">
-            <td><span>1</span></td><td>82%</td>
+            <td><span>v</span></td><td>82%</td>
           </tr>
           <tr class="city-weather-row">
-            <td><span>3<span></td><td>22%</td>
+            <td><span>1</span></td><td>22%</td>
           </tr>
           <tr class="city-weather-row">
-            <td>hot</td><td>73%</td>
+            <td><span>W</span> hot</td><td>73%</td>
           </tr>
           <tr class="city-weather-row">
-            <td>warm</td><td>19%</td>
+            <td><span>Q</span> warm</td><td>19%</td>
           </tr>
         </table>
         <div class="price">

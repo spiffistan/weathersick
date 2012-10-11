@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/Nerian/bootstrap-datepicker-rails.git
+  revision: 3f1c622de3885732531d1348e11eced87cbe5ebe
+  specs:
+    bootstrap-datepicker-rails (0.6.17)
+      railties (>= 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -35,8 +42,6 @@ GEM
       ejs (~> 1.0.0)
       jquery-rails
       railties (>= 3.1)
-    bootstrap-datepicker-rails (0.6.17)
-      railties (>= 3.0)
     bson (1.6.4)
     bson_ext (1.6.4)
       bson (~> 1.6.4)
@@ -182,7 +187,7 @@ PLATFORMS
 
 DEPENDENCIES
   backbone-on-rails
-  bootstrap-datepicker-rails
+  bootstrap-datepicker-rails!
   bson
   bson_ext
   coffee-rails (~> 3.2.1)

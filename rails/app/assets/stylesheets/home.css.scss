@@ -45,6 +45,16 @@ $font-head: 'Cabin Condensed', 'Helvetica', 'Arial', sans-serif;
     font-style: normal;
 }
 
+@font-face {
+    font-family:'ClimaconsRegular';
+    src: asset-url('climacons-webfont.eot', 'fonts');
+    src: asset-url('climacons-webfont.eot?#iefix', 'fonts') format('embedded-opentype'),
+         asset-url('climacons-webfont.woff', 'fonts') format('woff'),
+         asset-url('climacons-webfont.ttf', 'fonts') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 $bg: #333;
 
 
@@ -183,7 +193,7 @@ body {
         left: 20px;
 
         span {
-          font-family: 'MeteoconsRegular';
+          font-family: 'ClimaconsRegular';
           font-size: 34px;
           position: absolute;
           top: 2px;
@@ -219,7 +229,8 @@ body {
     height: 100px;
     font-size: 24px;
     border-radius: 10px;
-    @include gradient($cyan, darken($cyan, 2%));
+    // @include gradient($cyan, darken($cyan, 2%));
+    background: $cyan;
     border-top: 3px solid darken($cyan, 10%);
     border-left: 1px solid darken($cyan, 5%); 
     border-right: 1px solid darken($cyan, 5%); 
@@ -391,7 +402,7 @@ body {
       font-family: $font-script;
       
       span {
-        font-family: 'MeteoconsRegular';
+        font-family: 'ClimaconsRegular';
         font-size: 25px;
     }
     }

@@ -27,8 +27,12 @@ class AirportsController < ApplicationController
   end
 
   def typeahead
-    @airports = Airport.search_name_iata(params[:query]).limit(10).all.collect! {|airport| airport.name }
+    @airports = Airport.search_name_iata(params[:query]).limit(10).all.collect! do |airport| 
+      { name: airport.name, id: airport.iata_code } 
+    end
 
-    respond_with @airports
+    respond_to do |format|
+      format.json{ render :json => @airports.to_json }
+    end
   end
 end

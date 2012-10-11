@@ -6,32 +6,6 @@
   <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700' rel='stylesheet' type='text/css'>
 
-  <script type="text/javascript"> 
-    window.cloudSpeed = 0.03;
-
-    function easeInQuad(t) {
-      var c = 0.01, d = 10, b = 0.03;
-      return c * (t/=d)*t + b;
-    }
-    var done = false;
-    function accelerateClouds(t, v) {
-      window.cloudSpeed = easeInQuad(t);
-      if(window.cloudSpeed >= v)
-        done = true
-      if(!done) {
-        setTimeout(function() { accelerateClouds(t+1, v) }, 10);
-      }
-    }
-
-    function decelerateClouds(t, v) {
-      window.cloudSpeed = -easeInQuad(t);
-      if(window.cloudSpeed <= v)
-        done = true
-      if(!done) {
-        setTimeout(function() { decelerateClouds(t+1, v) }, 10);
-      }
-    }
-  </script>
   <script id="vs" type="x-shader/x-vertex">
 
 			varying vec2 vUv;

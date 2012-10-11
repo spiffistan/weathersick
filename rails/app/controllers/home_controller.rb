@@ -12,7 +12,7 @@ class HomeController < ApplicationController
     @date_to = ((DateTime.now >> 1).to_date + 3.days).strftime('%d/%m/%Y')
   
   end
-2
+
   def nice_weather
 
     range = (48..49) # (params[:range_start].to_i..params[:range_end].to_i)
