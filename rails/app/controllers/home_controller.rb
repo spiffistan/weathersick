@@ -34,7 +34,8 @@ class HomeController < ApplicationController
     date_from = DateTime.strptime(params[:date_from], DATE_FORMAT)
     date_to = DateTime.strptime(params[:date_to], DATE_FORMAT)
     range = ((date_from.cweek + 1)..(date_to.cweek + 1)) # cweek starts with 0
-    sloc = [10.73,59.91] # mock location for Oslo, Norway
+    
+    sloc = Airport.where(iata_code: from_iata).first.sphereloc
 
     q = { 
       "$and" => [ 
@@ -43,7 +44,7 @@ class HomeController < ApplicationController
         chance_crappy: { "$lte" => 20 }, 
         week: { "$in" => range.to_a } 
       ],
-      sphereloc: {"$near" => sloc }, 
+      sphereloc: {"$near" => sloc, "$maxDistance" => 100 }, 
     }
 
     list = HistoricalWeather.where(q).fields(

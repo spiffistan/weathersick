@@ -24,7 +24,7 @@ class Airport
 
   class << self
     def nearest(location)
-      where(loc: {"$near" => location}).limit(1).first
+      where(loc: {"$near" => location}, in_use: true).limit(1).first
     end
 
     def near(location)
