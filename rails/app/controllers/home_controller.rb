@@ -1,10 +1,11 @@
 require 'open-uri'
 require 'geokit'
+require 'json'
 
 class HomeController < ApplicationController
 
   DATE_FORMAT = '%d/%m/%Y'
-  NUM_RESULTS = 1
+  NUM_RESULTS = 3
 
   include Flight
 
@@ -12,8 +13,8 @@ class HomeController < ApplicationController
 
   def index
 
-  @date_from = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
-  @date_to = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
+    @date_from = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
+    @date_to = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
 
     # geoloc = Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
     geoloc = Geokit::Geocoders::MultiGeocoder.geocode('84.48.215.199') # XXX Dummy working ip
@@ -26,8 +27,6 @@ class HomeController < ApplicationController
 
   def nice_weather
 
-    #range = (48..49) # (params[:range_start].to_i..params[:range_end].to_i)
-    
     duration = 7 # XXX dummy
     num_people = 1 # dummy
    
@@ -76,39 +75,17 @@ class HomeController < ApplicationController
     destinations = []
 
     cities.each do |city|
-      destination = city.attributes
+      destination = JSON.parse(city.to_json) # convert to hash since we need to edit the objects. XXX SNOOF SNOOF UGLY WE DO NOT WANT THIS XXX
       airport = Airport.nearest(city.loc)
       results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
-      destination[:total_fare] = results[0][:total_fare]
-      destination[:booking_link] = results[0][:booking_link]
-      destinations << destination
+      unless(results.empty?)
+        destination[:total_fare] = results[0][:total_fare]
+        destination[:booking_link] = results[0][:booking_link]
+        destinations << destination
+      end
     end
 
-    puts destinations
-
     respond_with destinations
-  end
 
-  private
-
-  def flight_search(cities)
-
-
-
-    puts airports
-
-#    if(params[:from])
-#      @results = booker.search(Flight::VayamaSearch::SEARCH_OW, 'EWR', 'SFO', (DateTime.now >> 1), 1)
-#    end
-#
-#    respond_with @results do |format|
-#      format.json { render json: @results }
-#    end
-    # Development:
-#   respond_to do |format|
-#     format.json  { 
-#       render json: open('http://localhost:3000/flight.json').read
-#     }
-#   end
   end
 end
