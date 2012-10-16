@@ -11,9 +11,15 @@ class HomeController < ApplicationController
   respond_to :html, :json
 
   def index
+<<<<<<< HEAD
 
   @date_from = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
   @date_to = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
+=======
+    
+    @date_from = (DateTime.now.next_week.next_day(5-1)).to_date.strftime('%d/%m/%Y')
+    @date_to = (DateTime.now.next_week.next_day(7-1)).to_date.strftime('%d/%m/%Y')
+>>>>>>> aa3480919007ff24b529b10bbf23f180b749085b
 
     # geoloc = Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
     geoloc = Geokit::Geocoders::MultiGeocoder.geocode('84.48.215.199') # XXX Dummy working ip
