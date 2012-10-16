@@ -69,11 +69,13 @@ module Weathersick
     
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
+    config.log_level = :warn
+
     config.generators do |g|
        g.orm             :mongo_mapper
        g.template_engine :erb
        g.test_framework  :rspec
-     end
+    end
   
   end
 

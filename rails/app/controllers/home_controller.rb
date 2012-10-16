@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'geokit'
 
 class HomeController < ApplicationController
 
@@ -10,7 +11,14 @@ class HomeController < ApplicationController
 
     @date_from = (DateTime.now >> 1).to_date.strftime('%d/%m/%Y')
     @date_to = ((DateTime.now >> 1).to_date + 3.days).strftime('%d/%m/%Y')
-  
+
+    # geoloc = Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
+    geoloc = Geokit::Geocoders::MultiGeocoder.geocode('84.48.215.199') # XXX Dummy working ip
+
+    latlng = [geoloc.lat,geoloc.lng]
+
+    @airport = Airport.nearest(latlng)
+
   end
 
   def nice_weather
