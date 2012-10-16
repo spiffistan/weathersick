@@ -59,16 +59,8 @@ class HomeController < ApplicationController
     stations = list.collect { |it| it.station }
     good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
     cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).limit(30).all.shuffle!.take(NUM_RESULTS)
-    
-    cities.each do |city|
-      city.weather = []
-      w = list.select { |element| element.station == city.wstation_code }
-      city.weather << w[0]
-      #w = list.select { |element| element.station == city.wstation_code }
-      #w.each do |we|
-      #  city.weather["week" + we.week.to_i.to_s] = we
-      #end
-    end
+
+    puts cities.inspect
 
     # TODO Move this to somewhere else
     booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
@@ -78,6 +70,9 @@ class HomeController < ApplicationController
 
     cities.each do |city|
       destination = JSON.parse(city.to_json) # convert to hash since we need to edit the objects. XXX SNOOF SNOOF UGLY WE DO NOT WANT THIS XXX
+      destination[:weather] = []
+      w = list.select { |element| element.station == city.wstation_code }
+      destination[:weather] << JSON.parse(w[0].to_json) # XXX :( le uglies
       airport = Airport.nearest(city.loc)
       results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
       unless(results.empty?)
