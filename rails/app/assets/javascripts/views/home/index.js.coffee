@@ -32,7 +32,9 @@ class Weathersick.Views.HomeIndex extends Backbone.View
     # accelerateClouds(1, 0.2)
     $('#search-container').animate(top: 100, 500, ->
       $('#spinner').fadeIn(100)
-      Weathersick.citiesRouter.list()
+      # Weathersick.citiesRouter.list()
+      params = $('#search-form').serializeArray()
+      Weathersick.citiesRouter.niceNear(params)
       # TODO decelerate
       window.cloudSpeed = 0.01
     )
