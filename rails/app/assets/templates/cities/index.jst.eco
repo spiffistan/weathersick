@@ -9,16 +9,17 @@
       <div class="city-weather">
         <table>
           <tr class="city-weather-row">
-            <td><span>3</span></td><td><%= city.weather[0].chance_partly_or_sunny %>%</td>
+            <td><span class="icon">3</span></td><td><%= city.weather[0].chance_partly_or_sunny %>%</td>
           </tr>
           <tr class="city-weather-row">
-            <td><span>8</span></td><td><%= city.weather[0].chance_crappy %>%</td>
+            <td><span class="icon">8</span></td><td><%= city.weather[0].chance_crappy %>%</td>
           </tr>
           <tr class="city-weather-row">
-            <td><span>'</span></td><td><%= city.weather[0].chance_hightemp %>%</td>
+            <td><span class="icon">'</span></td><td><%= city.weather[0].chance_hightemp %>%</td>
           </tr>
           <tr class="city-weather-row">
-            <td><%= city.weather[0].high_avg_c %><span>*</span></td><td><%= city.weather[0].high_avg_f %><span>+</span></td>
+            <td class="temp"><%= city.weather[0].high_avg_c %><span class="icon">*</span></td>
+            <td class="temp"><%= city.weather[0].high_avg_f %><span class="icon">+</span></td>
           </tr>
         </table>
         <div class="price">

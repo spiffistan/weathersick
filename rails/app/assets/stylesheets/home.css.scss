@@ -398,9 +398,14 @@ body {
       padding: 3px 5px;
     }
 
-    span {
+    td.temp {
+      font-family: $font-script;
+    }
+
+    span.icon {
         font-family: 'MeteoconsRegular';
         font-size: 25px;
     }
+
   }
 }
