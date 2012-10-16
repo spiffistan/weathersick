@@ -56,7 +56,7 @@ class HomeController < ApplicationController
 
     stations = list.collect { |it| it.station }
     good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).limit(NUM_RESULTS).all
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).all.shuffle!.take(NUM_RESULTS)
     
     cities.each do |city|
       city.weather = []
