@@ -41,7 +41,8 @@ class HomeController < ApplicationController
         chance_hightemp: { "$gte" => 80 }, 
         chance_crappy: { "$lte" => 20 }, 
         week: { "$in" => range.to_a } 
-      ]
+      ],
+      sphereloc: {"$near" => sloc }, # mock location, fix
     }
 
     list = HistoricalWeather.where(q).fields(
