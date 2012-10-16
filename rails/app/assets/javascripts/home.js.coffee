@@ -5,7 +5,7 @@
 
 $ -> 
 
-  $('.datepicker').datepicker()
+  $('.datepicker').datepicker({'format':'dd/mm/yyyy'});
 
   $('.flip').live 'click', (event) ->
     $(this).find('.card').addClass('flipped').mouseleave ->
