@@ -18,7 +18,7 @@
             <td><span>'</span></td><td><%= city.weather[0].chance_hightemp %>%</td>
           </tr>
           <tr class="city-weather-row">
-            <td><span>*</span></td><td><%= city.weather[0].high_avg_c %></td>
+            <td><%= city.weather[0].high_avg_c %><span>*</span></td><td><%= city.weather[0].high_avg_f %><span>+</span></td>
           </tr>
         </table>
         <div class="price">

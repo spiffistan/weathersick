@@ -50,6 +50,7 @@ class HomeController < ApplicationController
       chance_hightemp:1,
       chance_crappy:1,
       high_avg_c:1,
+      high_avg_f:1,
       week:1
     ).all
 
