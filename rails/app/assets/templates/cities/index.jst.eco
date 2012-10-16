@@ -22,13 +22,15 @@
             <td class="temp"><%= city.weather[0].high_avg_f %><span class="icon">+</span></td>
           </tr>
         </table>
+        <a href="<%= city.booking_link %>">
         <div class="price">
           <div class="from">from</div>
           <div class="fare">
-            $<%= Math.floor(Math.random() * 500) + 100 %>
+            $<%= city.total_fare %>
           </div>
           <div class="way">one-way</div>
         </div>
+        </a>
       </div>
     </div>
 

@@ -12,7 +12,6 @@ class Flight::VayamaSearch < Flight::Search
 
   def initialize(api_url, params)
     @api_url = api_url || API_URL
-    super(api_url) 
     @requestor_url = params[:url] 
     @requestor_id = params[:id] 
     @requestor_type = params[:type]

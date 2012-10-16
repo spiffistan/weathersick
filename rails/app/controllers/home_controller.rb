@@ -4,7 +4,7 @@ require 'geokit'
 class HomeController < ApplicationController
 
   DATE_FORMAT = '%d/%m/%Y'
-  NUM_RESULTS = 3
+  NUM_RESULTS = 1
 
   include Flight
 
@@ -28,12 +28,13 @@ class HomeController < ApplicationController
 
     #range = (48..49) # (params[:range_start].to_i..params[:range_end].to_i)
     
-    if(params[:date_from] && params[:date_to]) # TODO more sanity checks
-      from = Date.strptime(params[:date_from], DATE_FORMAT)
-      to = Date.strptime(params[:date_to], DATE_FORMAT)
-      range = (from.cweek..to.cweek)
-      puts range
-    end
+    duration = 7 # XXX dummy
+    num_people = 1 # dummy
+   
+    from_iata = params[:from]
+    date_from = DateTime.strptime(params[:date_from], DATE_FORMAT)
+    date_to = DateTime.strptime(params[:date_to], DATE_FORMAT)
+    range = ((date_from.cweek + 1)..(date_to.cweek + 1)) # cweek starts with 0
 
     q = { 
       "$and" => [ 
@@ -56,7 +57,7 @@ class HomeController < ApplicationController
 
     stations = list.collect { |it| it.station }
     good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
-    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).all.shuffle!.take(NUM_RESULTS)
+    cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).limit(30).all.shuffle!.take(NUM_RESULTS)
     
     cities.each do |city|
       city.weather = []
@@ -68,28 +69,31 @@ class HomeController < ApplicationController
       #end
     end
 
-    puts cities.inspect
-
-    respond_with cities
-  end
-
-  def flight_search
-
     # TODO Move this to somewhere else
     booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
-    booker = Flight::VayamaSearch.new(nil, params)
+    booker = Flight::VayamaSearch.new(nil, booker_params)
 
-    if(params[:date_from] && params[:date_to]) # TODO more sanity checks
-      from = Date.strptime(params[:date_from], DATE_FORMAT)
-      to = Date.strptime(params[:date_to], DATE_FORMAT)
-      cities = nice_weather((from.cweek..to.cweek))
-    end
-
-    airports = []
+    destinations = []
 
     cities.each do |city|
-      airports << Airport.nearest(city.loc)
+      destination = city.attributes
+      airport = Airport.nearest(city.loc)
+      results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
+      destination[:total_fare] = results[0][:total_fare]
+      destination[:booking_link] = results[0][:booking_link]
+      destinations << destination
     end
+
+    puts destinations
+
+    respond_with destinations
+  end
+
+  private
+
+  def flight_search(cities)
+
+
 
     puts airports
 
