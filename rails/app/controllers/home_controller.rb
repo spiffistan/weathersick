@@ -75,15 +75,42 @@ class HomeController < ApplicationController
       w = list.select { |element| element.station == city.wstation_code }
       destination[:weather] << JSON.parse(w[0].to_json) # XXX :( le uglies
       airport = Airport.nearest(city.loc)
-      results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
-      unless(results.empty?)
-        destination[:total_fare] = results[0][:total_fare]
-        destination[:booking_link] = results[0][:booking_link]
-        destinations << destination
-      end
+      puts airport.inspect
+      #results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
+      #unless(results.empty?)
+      #  destination[:total_fare] = results[0][:total_fare]
+      #  destination[:booking_link] = results[0][:booking_link]
+      #  destinations << destination
+      #end
+      destinations << destination 
     end
 
     respond_with destinations
 
+  end
+  
+  def flight_search
+    booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
+    booker = Flight::VayamaSearch.new(nil, booker_params)
+    
+    num_people = 1
+    
+    destination = Hash.new
+    
+    from_iata = "OSL" # dummy
+    to_iata = "LHR" # dummy
+    foo = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
+    date_from = DateTime.strptime(foo, DATE_FORMAT)
+    
+    results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, to_iata, date_from, num_people)
+    
+    unless(results.empty?)
+      destination[:total_fare] = results[0][:total_fare]
+      destination[:booking_link] = results[0][:booking_link]
+      destination
+    end
+    puts destination
+    respond_with destination
+    
   end
 end

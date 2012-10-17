@@ -29,6 +29,7 @@ class Weathersick.Views.HomeIndex extends Backbone.View
   randomCities: ->
     $('#cities').fadeOut(100)
     $('#logo').fadeOut(100)
+    $('#description').fadeOut(500)
     # accelerateClouds(1, 0.2)
     $('#search-container').animate(top: 100, 500, ->
       $('#spinner').fadeIn(100)
