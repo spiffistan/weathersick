@@ -105,12 +105,27 @@ body {
     position: absolute; 
     height: 100px;
     width: 960px;
-    top: 25%;
+    top: 20%;
     font-family: 'oleo script';
     font-size: 96px;
     text-shadow: 0 0 20px white;
     color: white;
     text-align: center;
+  }
+  
+  #description {
+	  position: absolute;
+	  width: 960px;
+	  top: 60%;
+	  font-family: 'oleo script';
+      text-shadow: 0 0 5px rgb(200,200,200);
+      color: gray;
+      text-align: center;
+	  font-size: 18px;
+	  
+	  .small {
+		  font-size: 14px;
+	  }
   }
 
   #search-container {
