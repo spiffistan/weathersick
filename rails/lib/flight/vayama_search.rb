@@ -18,11 +18,11 @@ class Flight::VayamaSearch < Flight::Search
   end
 
   # Search Vayama for a trip
-  def search(type, from, to, time, num_people)
+  def search(type, from, to, time, adults, children)
     
     # TODO sanity-check parameters?
 
-    request = build_request({type: type, from: from, to: to, time: time, num_people: num_people})
+    request = build_request({type: type, from: from, to: to, time: time, adults: adults, children: children})
 
     response = send_request(request)
 
@@ -77,7 +77,10 @@ class Flight::VayamaSearch < Flight::Search
         # TODO
         xml.TravelerInfoSummary(TicketingCountryCode: 'US') do
           xml.AirTravelerAvail do
-            xml.PassengerTypeQuantity(Quantity: params[:num_people], Code: 'ADT')
+            xml.PassengerTypeQuantity(Quantity: params[:adults], Code: 'ADT')
+            unless params[:children] == 0
+              xml.PassengerTypeQuantity(Quantity: params[:children], Code: 'CHD')
+            end
           end
         end
 
@@ -93,7 +96,6 @@ class Flight::VayamaSearch < Flight::Search
     request.body = xml
     request.content_type = 'text/xml'
     response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
-
     return response
   end
 

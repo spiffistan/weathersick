@@ -16,17 +16,28 @@ class FlightsearchController < ApplicationController
     from = params[:from] || 'OSL'
     to = params[:to] || 'LHR'
     adults = params[:adults] || 1
+    children = params[:children] || 0
+    limit = params[:limit] || 5
         
     destination = Hash.new
+    destination[:success] = true
+    destination[:results] = []
+    i = 0
     
-    results = booker.search(Flight::VayamaSearch::SEARCH_OW, from, to, date_from, adults)
-    
+    results = booker.search(Flight::VayamaSearch::SEARCH_OW, from, to, date_from, adults, children)
+
     unless(results.empty?)
-      destination[:total_fare] = results[0][:total_fare]
-      destination[:booking_link] = results[0][:booking_link]
-      destination
+      results.each do |result|
+        destination[:results][i] = Hash.new
+        destination[:results][i][:total_fare] = results[i][:total_fare]
+        destination[:results][i][:booking_link] = results[i][:booking_link]
+        i += 1
+        if i == limit
+          break
+        end
+      end
     else
-      destination[:error] = true
+      destination[:success] = false
     end
 
     respond_with destination
