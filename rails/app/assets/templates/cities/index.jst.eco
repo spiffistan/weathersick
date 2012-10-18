@@ -1,6 +1,6 @@
 <% for city in @cities: %>
 <div class="flip">
-  <div class="city search-result card">
+  <div class="city search-result card" id="city-<%= city._id %>">
     <div class="front face"> 
       <div class="city-info">
         <div class="city-name"><%= city.city_name %></div>
