@@ -26,15 +26,12 @@ class HomeController < ApplicationController
   end
 
   def nice_weather
-
-    duration = 7 # XXX dummy
     num_people = 1 # dummy
    
     from_iata = params[:from]
     date_from = DateTime.strptime(params[:date_from], DATE_FORMAT)
     date_to = DateTime.strptime(params[:date_to], DATE_FORMAT)
     range = ((date_from.cweek + 1)..(date_to.cweek + 1)) # cweek starts with 0
-    
     sloc = Airport.where(iata_code: from_iata).first.sphereloc
 
     q = { 
@@ -87,30 +84,5 @@ class HomeController < ApplicationController
 
     respond_with destinations
 
-  end
-  
-  def flight_search
-    booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
-    booker = Flight::VayamaSearch.new(nil, booker_params)
-    
-    num_people = 1
-    
-    destination = Hash.new
-    
-    from_iata = "OSL" # dummy
-    to_iata = "LHR" # dummy
-    foo = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
-    date_from = DateTime.strptime(foo, DATE_FORMAT)
-    
-    results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, to_iata, date_from, num_people)
-    
-    unless(results.empty?)
-      destination[:total_fare] = results[0][:total_fare]
-      destination[:booking_link] = results[0][:booking_link]
-      destination
-    end
-    puts destination
-    respond_with destination
-    
   end
 end
