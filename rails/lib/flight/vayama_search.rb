@@ -180,7 +180,6 @@ class Flight::VayamaSearch < Flight::Search
       
       results << itinerary
     end
-    puts results
     return results # { success: success, results: results }
 
   end
