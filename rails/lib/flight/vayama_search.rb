@@ -6,7 +6,7 @@ require 'net/http'
 class Flight::VayamaSearch < Flight::Search
 
   API_URL = 'http://www.vayama.com/axis2/services/VayamaService' # Default API URL
-  SEARCH_OW = 1, SEARCH_RT = 2, SEARCH_OJ = 3, SEARCH_MC = 4, SEARCH_LB = 5
+  SEARCH_OW = 1, SEARCH_RT = 2, SEARCH_OJ = 3, SEARCH_MC = 4, SEARCH_LB = 5 # 3-5 unsupported
 
   attr_reader :requestor_id, :requestor_url, :requestor_type
 
@@ -18,11 +18,10 @@ class Flight::VayamaSearch < Flight::Search
   end
 
   # Search Vayama for a trip
-  def search(type, from, to, time, adults, children)
-    
+  def search(type, from, to, adults, children, date_from, date_to)
     # TODO sanity-check parameters?
 
-    request = build_request({type: type, from: from, to: to, time: time, adults: adults, children: children})
+    request = build_request({type: type, from: from, to: to, adults: adults, children: children, date_from: date_from, date_to: date_to})
 
     response = send_request(request)
 
@@ -57,12 +56,23 @@ class Flight::VayamaSearch < Flight::Search
         when SEARCH_OW # One-way search
 
           xml.OriginDestinationInformation(RPH: '1') do
-            xml.DepartureDateTime params[:time].iso8601(0).split('+')[0]
+            xml.DepartureDateTime params[:date_from].iso8601(0).split('+')[0]
             xml.OriginLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:from])
             xml.DestinationLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:to])
           end
 
         when SEARCH_RT # Round-trip search
+          xml.OriginDestinationInformation(RPH: '1') do
+            xml.DepartureDateTime params[:date_from].iso8601(0).split('+')[0]
+            xml.OriginLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:from])
+            xml.DestinationLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:to])
+          end
+          xml.OriginDestinationInformation(RPH: '1') do
+            xml.DepartureDateTime params[:date_to].iso8601(0).split('+')[0]
+            xml.OriginLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:to])
+            xml.DestinationLocation(MultiAirportCityInd: 'false', CodeContext: 'IATA', LocationCode: params[:from])
+          end
+        
         when SEARCH_OJ # Open-jaw search
         when SEARCH_MC # Multi-city search
         when SEARCH_LB # Location-based search
@@ -86,7 +96,7 @@ class Flight::VayamaSearch < Flight::Search
 
       end
     end
-
+    
     return builder.to_xml
   end
 
@@ -94,6 +104,7 @@ class Flight::VayamaSearch < Flight::Search
     uri = URI.parse(@api_url)
     request = Net::HTTP::Post.new(uri.path)
     request.body = xml
+    
     request.content_type = 'text/xml'
     response = Net::HTTP.new(uri.host, uri.port).start { |http| http.request request }
     return response
@@ -103,41 +114,53 @@ class Flight::VayamaSearch < Flight::Search
     results = []
     doc = Nokogiri::XML(response.body)
     doc.remove_namespaces!
-
     success = doc.xpath('//OTA_AirLowFareSearchRS').first['EchoToken'] == "Error" ? false : true
     
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
 
       itinerary = {}
+      case elem.xpath('.//AirItinerary').first['DirectionInd']
+      when 'OneWay'
+        itinerary[:type] = 'one_way'
+      when 'RoundTrip'
+        itinerary[:type] = 'round_trip'
+      end
+      itinerary[:num_trips] = 0
+      itinerary[:trips] = []
 
-      itinerary[:num_segments] = 0
-      itinerary[:segments] = []
-
-      elem.xpath('.//AirItinerary/OriginDestinationOptions/OriginDestinationOption/FlightSegment').each do |elem|
+      elem.xpath('.//AirItinerary/OriginDestinationOptions/OriginDestinationOption').each do |elem|
+        trip = {}
+        trip[:num_segments] = 0
+        trip[:segments] = []
+        itinerary[:num_trips] += 1
         
-        segment = {}
+        elem.xpath('.//FlightSegment').each do |elem|
+          
+          segment = {}
 
-        itinerary[:num_segments] += 1
+          trip[:num_segments] += 1
 
-        segment[:departure_datetime]  = DateTime.parse(elem['DepartureDateTime']) # XXX local time? UTC?
-        segment[:arrival_datetime]    = DateTime.parse(elem['ArrivalDateTime']) # XXX local time? UTC?
+          segment[:departure_datetime]  = DateTime.parse(elem['DepartureDateTime']) # XXX local time? UTC?
+          segment[:arrival_datetime]    = DateTime.parse(elem['ArrivalDateTime']) # XXX local time? UTC?
 
-        elem.children.each do |elem|
+          elem.children.each do |elem|
 
-          case elem.node_name
-          when 'DepartureAirport'
-            segment[:departure_code] = elem['LocationCode']
-          when 'ArrivalAirport'
-            segment[:arrival_code] = elem['LocationCode']
-          when 'MarketingAirline'
-            segment[:marketing_airline_code] = elem['Code']
-          when 'OperatingAirline'
-            segment[:operating_airline_code] = elem['Code']
+            case elem.node_name
+            when 'DepartureAirport'
+              segment[:departure_code] = elem['LocationCode']
+            when 'ArrivalAirport'
+              segment[:arrival_code] = elem['LocationCode']
+            when 'MarketingAirline'
+              segment[:marketing_airline_code] = elem['Code']
+            when 'OperatingAirline'
+              segment[:operating_airline_code] = elem['Code']
+            end
+
           end
 
+          trip[:segments] << segment
         end
-
-        itinerary[:segments] << segment
+        itinerary[:trips] << trip
       end
 
       basefare = elem.xpath('.//AirItineraryPricingInfo/ItinTotalFare/BaseFare').first
@@ -157,7 +180,7 @@ class Flight::VayamaSearch < Flight::Search
       
       results << itinerary
     end
-
+    puts results
     return results # { success: success, results: results }
 
   end
