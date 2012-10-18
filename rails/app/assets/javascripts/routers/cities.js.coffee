@@ -19,10 +19,10 @@ class Weathersick.Routers.Cities extends Backbone.Router
               data: 
                 from: "OSL"
                 to: "LHR"
-                date_from: "08/10/2012"
-                date_to: "10/10/2012"
+                #date_from: "08/10/2012" # must urldecode in api
+                #date_to: "15/10/2012"
                 type: 1
-                num_people: 1
+                adults: 1
               success: =>
                 console.log(flights.at(0))
                 console.log(flights.at(0).attributes.total_fare)

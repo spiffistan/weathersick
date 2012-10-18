@@ -5,7 +5,7 @@ require 'json'
 class HomeController < ApplicationController
 
   DATE_FORMAT = '%d/%m/%Y'
-  NUM_RESULTS = 3
+  NUM_RESULTS = 5
 
   include Flight
 
@@ -73,12 +73,7 @@ class HomeController < ApplicationController
       destination[:weather] << JSON.parse(w[0].to_json) # XXX :( le uglies
       airport = Airport.nearest(city.loc)
       puts airport.inspect
-      #results = booker.search(Flight::VayamaSearch::SEARCH_OW, from_iata, airport.iata_code, date_from, num_people)
-      #unless(results.empty?)
-      #  destination[:total_fare] = results[0][:total_fare]
-      #  destination[:booking_link] = results[0][:booking_link]
-      #  destinations << destination
-      #end
+      
       destinations << destination 
     end
 

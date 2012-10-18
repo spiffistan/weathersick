@@ -26,10 +26,10 @@ class FlightsearchController < ApplicationController
     limit = params[:limit] || 5
     type = params[:type] || "1" # 1 = OW, 2 = RT
         
-    destination = Hash.new
-    destination[:success] = true
-    destination[:results] = []
-    i = 0
+    #destination = Hash.new
+    #destination[:success] = true
+    #destination[:results] = []
+    #i = 0
     
     if type == "1"
       results = booker.search(Flight::VayamaSearch::SEARCH_OW, from, to, adults, children, date_from, date_to)
@@ -37,7 +37,7 @@ class FlightsearchController < ApplicationController
       results = booker.search(Flight::VayamaSearch::SEARCH_RT, from, to, adults, children, date_from, date_to)
     end
     respond_with results
-    if (results.empty?)
+    #if (results.empty?)
     #  results.each do |result|
     #    destination[:results][i] = Hash.new
     #    destination[:results][i][:total_fare] = results[i][:total_fare]
@@ -48,10 +48,10 @@ class FlightsearchController < ApplicationController
     #    end
     #  end
     #else
-      destination[:success] = false
-    end
+      #results[:success] = false
+    #end
 
-    respond_with destination
+    #respond_with results
     
   end
 end

@@ -115,7 +115,7 @@ class Flight::VayamaSearch < Flight::Search
     doc = Nokogiri::XML(response.body)
     doc.remove_namespaces!
     success = doc.xpath('//OTA_AirLowFareSearchRS').first['EchoToken'] == "Error" ? false : true
-    
+
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
 
       itinerary = {}
