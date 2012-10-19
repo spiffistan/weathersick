@@ -18,7 +18,7 @@ class Flight::VayamaSearch < Flight::Search
   end
 
   # Search Vayama for a trip
-  def search(type, from, to, adults, children, date_from, date_to)
+  def search(type, from, to, adults, children, date_from, date_to, limit)
     # TODO sanity-check parameters?
 
     request = build_request({type: type, from: from, to: to, adults: adults, children: children, date_from: date_from, date_to: date_to})
@@ -27,7 +27,7 @@ class Flight::VayamaSearch < Flight::Search
 
 
     # TODO if response error
-    results = process_response(type, response)
+    results = process_response(type, response, limit)
     # XXX present results? 
     #
     return results
@@ -110,12 +110,14 @@ class Flight::VayamaSearch < Flight::Search
     return response
   end
 
-  def process_response(type, response)
+  def process_response(type, response, limit)
     results = []
     doc = Nokogiri::XML(response.body)
     doc.remove_namespaces!
     success = doc.xpath('//OTA_AirLowFareSearchRS').first['EchoToken'] == "Error" ? false : true
-
+    
+    itin_count = 1
+    
     doc.xpath('//OTA_AirLowFareSearchRS/PricedItineraries/PricedItinerary').each do |elem|
 
       itinerary = {}
@@ -177,8 +179,9 @@ class Flight::VayamaSearch < Flight::Search
       
       link = elem.xpath('.//BookItArgument[@Name="clickableURL"]').first['Value']
       itinerary[:booking_link] = link
-      
       results << itinerary
+      itin_count += 1
+      break if itin_count == limit+1 # limit of zero gives all results
     end
     return results # { success: success, results: results }
 

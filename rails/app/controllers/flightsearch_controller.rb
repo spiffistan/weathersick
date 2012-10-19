@@ -3,6 +3,14 @@ class FlightsearchController < ApplicationController
   
   respond_to :json
   
+  def urlclean(str)
+    # THIS IS HORRIBLE
+    if str.match(/%/)
+      str = CGI::unescape(str)
+    end
+    return str
+  end
+  
   def index
     booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
     booker = Flight::VayamaSearch.new(nil, booker_params)
@@ -10,31 +18,34 @@ class FlightsearchController < ApplicationController
     bar = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
     
     begin
-      date_from = DateTime.strptime(params[:date_from], DATE_FORMAT)
+      date_from = DateTime.strptime(urlclean(params[:date_from]), DATE_FORMAT)
     rescue Exception => exc
       date_from = DateTime.strptime(foo, DATE_FORMAT)
     end
     begin
-      date_to = DateTime.strptime(params[:date_to], DATE_FORMAT)
+      date_to = DateTime.strptime(urlclean(params[:date_to]), DATE_FORMAT)
     rescue Exception => exc
       date_to = DateTime.strptime(bar, DATE_FORMAT)
     end
+    
     from = params[:from] || 'OSL'
     to = params[:to] || 'LHR'
     adults = params[:adults] || 1
     children = params[:children] || 0
     limit = params[:limit] || 5
     type = params[:type] || "1" # 1 = OW, 2 = RT
-        
+    
+    limit = Integer(limit)
+    
     #destination = Hash.new
     #destination[:success] = true
     #destination[:results] = []
     #i = 0
     
     if type == "1"
-      results = booker.search(Flight::VayamaSearch::SEARCH_OW, from, to, adults, children, date_from, date_to)
+      results = booker.search(Flight::VayamaSearch::SEARCH_OW, from, to, adults, children, date_from, date_to, limit)
     else
-      results = booker.search(Flight::VayamaSearch::SEARCH_RT, from, to, adults, children, date_from, date_to)
+      results = booker.search(Flight::VayamaSearch::SEARCH_RT, from, to, adults, children, date_from, date_to, limit)
     end
     respond_with results
     #if (results.empty?)

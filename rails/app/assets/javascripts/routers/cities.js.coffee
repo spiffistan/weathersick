@@ -19,8 +19,8 @@ class Weathersick.Routers.Cities extends Backbone.Router
               data: 
                 from: "OSL"
                 to: "LHR"
-                #date_from: "08/10/2012" # must urldecode in api
-                #date_to: "15/10/2012"
+                date_from: "08/10/2012" # needs to be urldecoded, does not work atm
+                date_to: "15/10/2012"
                 type: 1
                 adults: 1
               success: =>
