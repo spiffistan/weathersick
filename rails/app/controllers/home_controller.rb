@@ -16,11 +16,7 @@ class HomeController < ApplicationController
     @date_from = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
     @date_to = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
     
-    if request.remote_ip != "127.0.0.1"
-      geoloc = Geokit::Geocoders::MultiGeocoder.geocode(request.remote_ip)
-    else
-      geoloc = Geokit::Geocoders::MultiGeocoder.geocode('84.48.215.199') # XXX Dummy working ip
-    end
+    geoloc = Geokit::Geocoders::MultiGeocoder.geocode('84.48.215.199') # XXX Dummy working ip
 
     latlng = [geoloc.lat,geoloc.lng]
 
