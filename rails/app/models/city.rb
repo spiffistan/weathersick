@@ -5,6 +5,7 @@ class City
   key :province_name, String
   key :country_name, String
   key :wstation_code, String
+  key :city_id, Integer
 
   key :city_rank, Float
 

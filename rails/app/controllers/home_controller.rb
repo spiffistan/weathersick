@@ -58,8 +58,6 @@ class HomeController < ApplicationController
     good = stations.select { |it| stations.count(it) == range.to_a.size }.uniq
     cities = City.where({ "$and" => [wstation_code: {"$in" => good}]}).sort(city_rank:-1).limit(30).all.shuffle!.take(NUM_RESULTS)
 
-    puts cities.inspect
-
     # TODO Move this to somewhere else
     booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
     booker = Flight::VayamaSearch.new(nil, booker_params)
@@ -72,7 +70,6 @@ class HomeController < ApplicationController
       w = list.select { |element| element.station == city.wstation_code }
       destination[:weather] << JSON.parse(w[0].to_json) # XXX :( le uglies
       airport = Airport.nearest(city.loc)
-      puts airport.inspect
       
       destinations << destination 
     end

@@ -4,6 +4,8 @@ Weathersick::Application.routes.draw do
   match '/nice-weather' => 'home#nice_weather'
   match '/search/flights' => 'flightsearch#index'
 
+  match '/airports/near' => 'airports#near'
+  match '/airports/nearest' => 'airports#nearest'
   match '/airports/search' => 'airports#search'
   match '/airports/typeahead' => 'airports#typeahead'
   

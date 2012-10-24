@@ -28,6 +28,8 @@ class FlightsearchController < ApplicationController
       date_to = DateTime.strptime(bar, DATE_FORMAT)
     end
     
+    puts params
+    
     from = params[:from] || 'OSL'
     to = params[:to] || 'LHR'
     adults = params[:adults] || 1
@@ -36,6 +38,9 @@ class FlightsearchController < ApplicationController
     type = params[:type] || "1" # 1 = OW, 2 = RT
     
     limit = Integer(limit)
+    
+    logger.debug params
+    #logger.debug "From: {from}"
     
     #destination = Hash.new
     #destination[:success] = true

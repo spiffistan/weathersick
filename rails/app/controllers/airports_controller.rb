@@ -19,6 +19,12 @@ class AirportsController < ApplicationController
 
     respond_with @airports
   end
+  
+  def nearest
+    @airport = Airport.nearest([Float(params[:location].split(',')[0]), Float(params[:location].split(',')[1])])
+
+    respond_with @airport
+  end
 
   def search
     @airports = Airport.search_name_iata(params[:query]).limit(10)
