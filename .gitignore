@@ -2,6 +2,10 @@
 *.DS_Store
 data.db
 
+curling/*
+dump/*
+node_modules/*
+
 # Rails
 
 *.rbc
