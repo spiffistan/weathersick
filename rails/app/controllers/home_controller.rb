@@ -36,8 +36,10 @@ class HomeController < ApplicationController
 
     temp.each do |city|
       hash = city.attributes
-      hash[:nearest_airport] = Airport.nearest(city.loc).iata_code
-      @cities << { name: "City: #{hash[:city_name]} (#{hash[:nearest_airport]})" , id: hash[:nearest_airport] }
+      airports = Airport.near(city.loc, 1).all
+      airports.each do |airport|
+        @cities << { name: "City: #{hash[:city_name]} - #{airport.iata_code} (#{airport.name})" , id: airport.iata_code }
+      end
     end
 
     respond_to do |format|

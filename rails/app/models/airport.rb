@@ -27,8 +27,9 @@ class Airport
       where(loc: {"$near" => location}, in_use: true).limit(1).first
     end
 
-    def near(location)
-      where(loc: {"$near" => location})
+    def near(location, max)
+      max ||= 0.1
+      where(loc: {"$near" => location, "$maxDistance" => max})
     end
 
     def has_iata
