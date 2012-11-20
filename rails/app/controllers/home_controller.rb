@@ -24,6 +24,28 @@ class HomeController < ApplicationController
 
   end
 
+  def typeahead_multi
+
+    @airports = Airport.search_name_iata(params[:query]).limit(10).all.collect! do |airport| 
+      { name: 'Airport: ' + airport.name, id: airport.iata_code } 
+    end
+
+    temp = City.search_name(params[:query]).limit(10).all.collect!
+
+    @cities = []
+
+    temp.each do |city|
+      hash = city.attributes
+      hash[:nearest_airport] = Airport.near(city.loc).first.iata_code
+      @cities << { name: "City: #{hash[:city_name]} (#{hash[:nearest_airport]})" , id: hash[:nearest_airport] }
+    end
+
+    respond_to do |format|
+      format.json{ render :json => (@airports + @cities).to_json }
+    end
+
+  end
+
   def nice_weather
     num_people = 1 # dummy
    

@@ -42,6 +42,8 @@ gem 'rainbow'
 
 gem 'jquery-rails'
 gem 'backbone-on-rails'
+
+gem 'thin'
   
 
 # To use ActiveModel has_secure_password

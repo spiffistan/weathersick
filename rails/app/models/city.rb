@@ -21,4 +21,10 @@ class City
   def self.near(location)
     where(loc: {"$near" => location})
   end
+
+  def self.search_name(text)
+    regex = /.*#{text}.*/i
+
+    where({city_name: regex})
+  end
 end

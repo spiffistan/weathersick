@@ -12,7 +12,8 @@ $ ->
       $(this).removeClass('flipped');
 
   $('.typeahead').typeahead 
-    ajax: '/airports/typeahead.json'
+  # ajax: '/airports/typeahead.json'
+    ajax: '/typeahead-multi.json'
     method: 'get'
     itemSelected: (item, val, text) ->
       $('.typeahead').val(val)

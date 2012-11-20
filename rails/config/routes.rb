@@ -8,6 +8,8 @@ Weathersick::Application.routes.draw do
   match '/airports/nearest' => 'airports#nearest'
   match '/airports/search' => 'airports#search'
   match '/airports/typeahead' => 'airports#typeahead'
+
+  match '/typeahead-multi' => 'home#typeahead_multi'
   
   resources :places
   resources :airports

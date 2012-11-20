@@ -1,5 +1,8 @@
 class Weathersick.Routers.Cities extends Backbone.Router
 
+  routes:
+    'nice-near': 'niceNear'
+
   niceNear: (params) =>
     cities = new Weathersick.Collections.Cities()
 
