@@ -12,7 +12,7 @@ class FlightsearchController < ApplicationController
   end
   
   def index
-    booker_params = { id: 'weathersick', type: 12, url: 'http://www.weathersick.com' }
+    booker_params = { id: 'commj', type: 12, url: 'http://www.weathersick.com' }
     booker = Flight::VayamaSearch.new(nil, booker_params)
     foo = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
     bar = (DateTime.now.next_week.next_day(7)).to_date.strftime(DATE_FORMAT)
