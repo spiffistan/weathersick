@@ -9,15 +9,18 @@ $yellow: rgb(255,247,28);
 $orange: rgb(255,132,66);
 
 $blue: rgb(27,71,121);
+$blue: rgb(54,110,157);
 
 $black50: rgba(0,0,0,0.5);
-$shadow3: 0 0 5px;
+$shadow1: 0 0 1px;
+$shadow3: 0 0 3px;
 $shadow5: 0 0 5px;
 $shadow7: 0 0 7px;
 $shadow9: 0 0 9px;
 
 $font-script: 'Oleo Script', 'Georiga', 'Times new roman', serif;
 $font-head: 'Cabin Condensed', 'Helvetica', 'Arial', sans-serif;
+$font-mono: 'Inconsolata', 'Consolas', 'Menlo', 'Andale Mono', monospace;
 
 @mixin gradient($from, $to) {
   /* fallback/image non-cover color */
@@ -120,14 +123,18 @@ body {
 	  position: absolute;
 	  width: 960px;
 	  top: 60%;
-	  font-family: 'oleo script';
-      text-shadow: 0 0 5px rgb(200,200,200);
-      color: gray;
-      text-align: center;
-	  font-size: 18px;
+	  font-family: $font-script;
+    text-shadow: 0 0 30px lighten($yellow, 15%);
+    color: $blue;
+    text-align: center;
+	  font-size: 22px;
+    line-height: 28px;
 	  
 	  .small {
-		  font-size: 14px;
+		  font-size: 12px;
+      font-weight: bold;
+      font-family: $font-mono;
+      text-shadow: 0 0 20px lighten($yellow, 15%);
 	  }
   }
 
