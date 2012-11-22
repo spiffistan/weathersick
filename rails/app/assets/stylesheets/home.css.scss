@@ -275,8 +275,18 @@ body {
       box-shadow: inset $shadow3 $black50;
       border: 7px solid $orange;
       color: white;
+
+      div.spinner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background-color: darken($orange, 10%);
+        border-radius: 75px;
+      }
      
-      -webkit-transform: rotate(5deg);
+      // -webkit-transform: rotate(5deg);
 
       div.from {
         position: relative;

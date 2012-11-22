@@ -3,7 +3,7 @@ class Weathersick.Views.HomeIndex extends Backbone.View
   el: $('#home-container')
 
   initialize: ->
-    opts =
+    spinneropts =
       lines: 17 
       length: 8 
       width: 6 
@@ -20,7 +20,7 @@ class Weathersick.Views.HomeIndex extends Backbone.View
       top: 'auto' 
       left: 'auto' 
 
-    spinner = new Spinner(opts).spin(document.getElementById('spinner'))
+    spinner = new Spinner(spinneropts).spin(document.getElementById('spinner'))
     this
 
   events:

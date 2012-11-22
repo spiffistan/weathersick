@@ -23,7 +23,30 @@ class Weathersick.Routers.Cities extends Backbone.Router
               success: =>
                 t = airports.first().attributes.iata_code
                 flights = new Weathersick.Collections.Flights()
-                console.log(t)
+
+                $('#city-' + city.attributes.city_id + ' .price').append('<div class="spinner">')
+                
+                spinneropts =
+                  lines: 17 
+                  length: 6 
+                  width: 4 
+                  radius: 29 
+                  corners: 1.0 
+                  rotate: 0 
+                  color: '#fff' 
+                  speed: 0.5 
+                  trail: 25 
+                  shadow: false
+                  hwaccel: true
+                  className: 'spinner' 
+                  zIndex: 2e9 
+                  top: 'auto' 
+                  left: 'auto' 
+
+                $('#city-' + city.attributes.city_id + ' .price .spinner')
+
+                spinner = new Spinner(spinneropts).spin($('#city-' + city.attributes.city_id + ' .price .spinner').get(0))
+
                 flights.fetch
                   data:
                     to: t
@@ -36,6 +59,8 @@ class Weathersick.Routers.Cities extends Backbone.Router
                     $('#city-' + city.attributes.city_id + ' .fare').text('$' + flights.at(0).attributes.total_fare)
                     $('#city-' + city.attributes.city_id + ' a').attr('href', flights.at(0).attributes.booking_link)
                     $('#city-' + city.attributes.city_id + ' a').attr("target", "_blank")
+                    $('#city-' + city.attributes.city_id + ' .price .spinner').fadeOut 'fast', ->
+                      this.remove()
                       # TODO populate flights
                   error: =>
                     console.log("no flight :(")
