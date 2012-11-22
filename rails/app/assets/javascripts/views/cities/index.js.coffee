@@ -8,4 +8,5 @@ class Weathersick.Views.CitiesIndex extends Backbone.View
 
   render: ->
     content = @template(cities: @model.toJSON())
-    $(@container).hide().html(content).fadeIn(300)
+    $(@container).html(content).show()
+    $('#results-container').fadeIn(300)
