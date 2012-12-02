@@ -15,10 +15,10 @@ cameraNear = 1
 cameraFar = 8000
 
 fogColor = 0x4584b4
-fogNear = -1 
+fogNear = -1
 fogFar = 3000
 
-init = -> 
+init = ->
 
   container = document.createElement('div')
 
@@ -72,15 +72,15 @@ init = ->
   mesh = new THREE.Mesh( geometry, material )
   scene.addObject(mesh)
 
-  mesh = new THREE.Mesh( geometry, material );
-  mesh.position.z = - 8000;
-  scene.addObject( mesh );
+  mesh = new THREE.Mesh( geometry, material )
+  mesh.position.z = - 8000
+  scene.addObject( mesh )
 
   renderer = new THREE.WebGLRenderer( antialias: false )
   renderer.setSize( window.innerWidth, window.innerHeight )
   $(container).append(renderer.domElement)
 
-  $('div.clouds').fadeIn(2000);
+  $('div.clouds').fadeIn(2000)
 
 animate = ->
 
@@ -94,7 +94,7 @@ render = ->
   position = ( ( new Date().getTime() - startTime ) * 0.025 ) % 8000
 
   camera.position.x += (camera.target.position.x) * 0.01
-  camera.position.y += (camera.target.position.y) * 0.01 
+  camera.position.y += (camera.target.position.y) * 0.01
   camera.position.z = - position + 8000
 
   camera.target.position.x = camera.position.x
@@ -103,5 +103,6 @@ render = ->
 
   renderer.render( scene, camera )
 
-init()
-animate()
+if ! Detector.webgl
+  init()
+  animate()
