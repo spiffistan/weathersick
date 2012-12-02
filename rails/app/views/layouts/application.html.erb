@@ -46,10 +46,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="https://raw.github.com/d3/d3-plugins/master/geo/projection/projection.js"></script>
 
-<div id="wrapper">
-  <%= yield %>
-</div>
+  <div id="wrapper">
+    <%= yield %>
+  </div>
 
 </body>
   <%= javascript_include_tag "application" %>

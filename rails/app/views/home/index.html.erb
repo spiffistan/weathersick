@@ -2,8 +2,7 @@
   <div id="logo">
     weathersick
   </div>
-  <div id="spinner">
-  </div>
+  <div id="spinner"></div>
   <div id="search-container">
     <form id="search-form" class="row-fluid">
       <div class="search-part">
@@ -30,6 +29,99 @@
     <p>You'll get a selection of cities, flights, and hotels. Try it!</p>
     <p class="small">Heads up! We'll try to  detect your closest airport, but if we're wrong, <br /> you can search for another. Then select your dates and go!</p>
   </div>
+
+  <div id="map-container">
+
+  </div>
+  <style>
+
+  .background {
+    fill: rgba(255,255,255,0.1)
+  }
+
+  .foreground {
+    fill: none;
+    stroke: rgba(255,255,255,0.1);
+    stroke-width: 1.5px;
+  }
+
+  .graticule {
+    fill: none;
+    stroke: rgba(255,255,255,0.3);
+    stroke-width: .5px;
+  }
+
+  .graticule:nth-child(2n) {
+    stroke-dasharray: 2,2;
+  }
+
+  .land {
+    fill: #d7c7ad;
+    stroke: #766951;
+  }
+
+  .land {
+    fill: rgba(255,255,255,0.2);
+    stroke: rgba(255,255,255,0.4);
+    
+  }
+
+  .boundary {
+    fill: none;
+    stroke: none;
+    /* stroke: rgba(255,255,255,0.6); */
+  }
+
+  </style>
+  <script>
+    var width = 960,
+    height = 500,
+    scale = 100;
+
+    var projection = d3.geo.kavrayskiy7().scale(scale)
+      .translate([width / 2 - .5, height / 2 - .5]);
+
+    var path = d3.geo.path()
+        .projection(projection);
+
+    var graticule = d3.geo.graticule();
+
+    var svg = d3.select("#map-container").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("transform", "scale(0.5)");
+
+    svg.append("path")
+        .datum(graticule.outline)
+        .attr("class", "background")
+        .attr("d", path);
+
+    svg.selectAll(".graticule")
+        .data(graticule.lines)
+      .enter().append("path")
+        .attr("class", "graticule")
+        .attr("d", path);
+
+    svg.append("path")
+        .datum(graticule.outline)
+        .attr("class", "foreground")
+        .attr("d", path);
+
+    d3.json("/boundaries.json", function(error, collection) {
+      svg.insert("path", ".graticule")
+          .datum(collection)
+          .attr("class", "boundary")
+          .attr("d", path);
+    });
+
+    d3.json("/land.json", function(error, collection) {
+      svg.insert("path", ".graticule,.boundary")
+          .datum(collection)
+          .attr("class", "land")
+          .attr("d", path);
+    });
+
+  </script>
 
   <div id="results-container">
     <div id="results-description">
