@@ -11,9 +11,36 @@ $ ->
     $(this).find('.card').addClass('flipped').mouseleave ->
       $(this).removeClass('flipped');
 
-  $('.typeahead').typeahead 
-  # ajax: '/airports/typeahead.json'
-    ajax: '/typeahead-multi.json'
+  spinneropts =
+    lines: 12
+    length: 2
+    width: 2
+    radius: 10
+    corners: 1.0
+    rotate: 0
+    color: '#fff'
+    speed: 1
+    trail: 25
+    shadow: false
+    hwaccel: false
+    className: 'spinner'
+    zIndex: 2e9
+    top: 'auto'
+    left: 'auto'
+
+  spinner = new Spinner(spinneropts).spin(document.getElementById('typeahead-spinner'))
+  $('#typeahead-spinner').fadeOut(100)
+
+  $('.typeahead').typeahead
+    ajax:
+      url: '/typeahead-multi.json'
+      preDispatch: (query) ->
+        # spinner.spin()
+        $('#typeahead-spinner').fadeIn(100)
+        return { query: query }
+      preProcess: (data) ->
+        $('#typeahead-spinner').fadeOut(100)
+        data
     method: 'get'
     itemSelected: (item, val, text) ->
       $('.typeahead').val(val)

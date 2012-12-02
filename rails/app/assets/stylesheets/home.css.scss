@@ -181,6 +181,7 @@ body {
 
       float: left;
       padding: 3px;
+      position: relative;
 
       label {
         font-size: 28px;
@@ -208,6 +209,15 @@ body {
       input, select {
         margin-bottom: 0px;
         outline: none !important;
+      }
+
+      #typeahead-spinner {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 30px;
+        height: 30px;
+        // display: none; // Default to hidden
       }
 
       .weather {
