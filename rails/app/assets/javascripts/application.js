@@ -10,7 +10,6 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-// require moment
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
@@ -19,12 +18,15 @@
 //= require lib/underscore
 //= require lib/moment
 //= require lib/spin
+//= require lib/d3.v3.min
+//= require lib/projection
 //= require lib/ThreeWebGL
 //= require lib/ThreeExtras
 //= require lib/Detector
 //= require lib/RequestAnimationFrame
 //= require backbone
 //= require weathersick
+//= require svgmap
 //= require home
 //= require_tree ../templates/
 //= require_tree ./models
