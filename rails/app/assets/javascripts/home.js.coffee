@@ -5,7 +5,7 @@
 
 $ -> 
 
-  $('.datepicker').datepicker({'format':'dd/mm/yyyy','weekStart':'1'});
+  $('.datepicker').datepicker({'format':'dd-M-yyyy','weekStart':'1'});
 
   $('.flip').live 'click', (event) ->
     $(this).find('.card').addClass('flipped').mouseleave ->
@@ -29,7 +29,7 @@ $ ->
     left: 'auto'
 
   spinner = new Spinner(spinneropts).spin(document.getElementById('typeahead-spinner'))
-  $('#typeahead-spinner').fadeOut(100)
+  $('#typeahead-spinner').fadeOut(0)
 
   $('.typeahead').typeahead
     ajax:

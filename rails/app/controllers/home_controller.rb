@@ -4,7 +4,7 @@ require 'json'
 
 class HomeController < ApplicationController
 
-  DATE_FORMAT = '%d/%m/%Y'
+  DATE_FORMAT = '%v'
   NUM_RESULTS = 5
 
   include Flight

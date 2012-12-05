@@ -93,7 +93,6 @@ class Flight::VayamaSearch < Flight::Search
             end
           end
         end
-
       end
     end
     
