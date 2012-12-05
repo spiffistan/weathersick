@@ -3,7 +3,8 @@ var width = 960,
 height = 300,
 scale = 100;
 
-var projection = d3.geo.kavrayskiy7().scale(scale)
+// var projection = d3.geo.kavrayskiy7().scale(scale)
+var projection = d3.geo.winkel3().scale(scale)
     .translate([width / 2 - .5, height / 2 - .5]);
 
 var path = d3.geo.path().projection(projection);

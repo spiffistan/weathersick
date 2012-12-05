@@ -93,18 +93,18 @@ body {
 .svgmap {
 
   .background {
-    fill: rgba($cyan,0.05)
+    fill: rgba($cyan,0.05);
   }
 
   .foreground {
     fill: none;
-    stroke: rgba($blue,0.2);
-    stroke-width: 1.5px;
+    stroke: rgba(black, 0.2);
+    stroke-width: 0.5px;
   }
 
   .graticule {
     fill: none;
-    stroke: rgba($turquoise, 0.1);
+    stroke: rgba(black, 0.2);
     stroke-width: .5px;
   }
 
@@ -113,8 +113,11 @@ body {
   }
 
   .graticule:nth-child(23) { // Equator
-    stroke: rgba($turquoise, 0.3);
     stroke-dasharray: 1,1;
+  }
+  .graticule:nth-child(2n+20) { // Equator
+    stroke: rgba(black, 0.2);
+    stroke-dasharray: 0;
   }
 
   .land {
@@ -161,6 +164,15 @@ body {
     text-shadow: 0 0 20px white;
     color: white;
     text-align: center;
+    
+    span {
+      position: absolute;
+      right: 250px;
+      bottom: 30px;
+      font-size: 26px;
+      color: $orange;
+      text-shadow: 0 0 10px rgba(red, 0.3);
+    }
   }
 
   #map-container {
