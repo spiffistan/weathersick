@@ -90,6 +90,49 @@ body {
   }
 }
 
+.svgmap {
+
+  .background {
+    fill: rgba($cyan,0.05)
+  }
+
+  .foreground {
+    fill: none;
+    stroke: rgba($blue,0.2);
+    stroke-width: 1.5px;
+  }
+
+  .graticule {
+    fill: none;
+    stroke: rgba($turquoise, 0.1);
+    stroke-width: .5px;
+  }
+
+  .graticule:nth-child(2n) {
+    stroke-dasharray: 2,2;
+  }
+
+  .graticule:nth-child(23) { // Equator
+    stroke: rgba($turquoise, 0.3);
+    stroke-dasharray: 1,1;
+  }
+
+  .land {
+    fill: rgba($blue,0.7);
+    stroke: none; /* rgba(255,255,255,0.25); */
+    
+  }
+
+  .boundary {
+    fill: none;
+    stroke: none;
+  }
+
+  .highlighted {
+    fill: #F00 !important;
+  }
+
+}
 
 #wrapper {
   margin: 0 auto; 
@@ -112,12 +155,18 @@ body {
     position: absolute; 
     height: 100px;
     width: 960px;
-    top: 20%;
+    top: 200px;
     font-family: 'oleo script';
     font-size: 96px;
     text-shadow: 0 0 20px white;
     color: white;
     text-align: center;
+  }
+
+  #map-container {
+    position: absolute;
+    top: 70px;
+    height: 250px;
   }
   
   #description {
