@@ -27,21 +27,21 @@ class Weathersick.Routers.Cities extends Backbone.Router
                 $('#city-' + city.attributes.city_id + ' .price').append('<div class="spinner">')
                 
                 spinneropts =
-                  lines: 17 
-                  length: 6 
-                  width: 4 
-                  radius: 29 
-                  corners: 1.0 
-                  rotate: 0 
-                  color: '#fff' 
-                  speed: 0.5 
-                  trail: 25 
+                  lines: 17
+                  length: 6
+                  width: 4
+                  radius: 29
+                  corners: 1.0
+                  rotate: 0
+                  color: '#fff'
+                  speed: 0.5
+                  trail: 25
                   shadow: false
                   hwaccel: true
-                  className: 'spinner' 
-                  zIndex: 2e9 
-                  top: 'auto' 
-                  left: 'auto' 
+                  className: 'spinner'
+                  zIndex: 2e9
+                  top: 'auto'
+                  left: 'auto'
 
                 $('#city-' + city.attributes.city_id + ' .price .spinner')
 

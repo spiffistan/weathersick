@@ -115,9 +115,10 @@ body {
   .graticule:nth-child(23) { // Equator
     stroke-dasharray: 1,1;
   }
-  .graticule:nth-child(2n+20) { // Equator
+
+  .graticule:nth-child(2n+20) {
     stroke: rgba(black, 0.2);
-    stroke-dasharray: 0;
+    stroke-dasharray: 2,2;
   }
 
   .land {
@@ -133,6 +134,12 @@ body {
 
   .highlighted {
     fill: #F00 !important;
+  }
+
+  .flightpath {
+    fill: none;
+    stroke: rgba(yellow, 0.4);
+    stroke-dasharray: 2,2;
   }
 
 }
@@ -267,6 +274,11 @@ body {
         box-shadow: none !important;
       }
 
+      input.input-date {
+        width: 120px;
+
+      }
+
       input, select {
         margin-bottom: 0px;
         outline: none !important;
@@ -287,6 +299,7 @@ body {
         position: relative;
         top: 2px;
         left: 20px;
+        width: 170px;
 
         span {
           font-family: 'ClimaconsRegular';
@@ -302,7 +315,7 @@ body {
     }
 
     .search-part:not(:first-child)  {
-      margin-left: 10px;
+      margin-left: 25px;
     }
 
     #search-submit {

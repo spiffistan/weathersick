@@ -1,5 +1,5 @@
 class FlightsearchController < ApplicationController
-  DATE_FORMAT = '%d/%m/%Y'
+  DATE_FORMAT = '%v'
   
   respond_to :json
   

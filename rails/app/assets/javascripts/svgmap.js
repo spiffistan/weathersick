@@ -48,7 +48,6 @@ d3.json("/boundaries.json", function(error, collection) {
 */ 
 
 var links = []
-var centroids = []
 
 d3.json("/world-countries.json", function(error, collection) {
       countries.selectAll("path")
@@ -66,4 +65,21 @@ d3.json("/world-countries.json", function(error, collection) {
         .attr('cy', ll[1])
         .attr('r', 2)
         .attr('class', 'highlighted')
+
+      var arc = d3.geo.greatArc().precision(1);
+
+      var links = [
+        { 'source': [10.0, 60.0], 'target': [114.15769, 22.28552] },
+        { 'source': [10.0, 60.0], 'target': [-74.0, 40.7] },
+        { 'source': [10.0, 60.0], 'target': [-43.2, -22.9] },
+        { 'source': [10.0, 60.0], 'target': [88, 22] },
+      ];
+
+        arcs.selectAll("path")
+          .data(links)
+            .enter().append("path")
+            .attr("class", "flightpath")
+            .attr("d", function(d) { return path(arc(d)); });
 });
+
+

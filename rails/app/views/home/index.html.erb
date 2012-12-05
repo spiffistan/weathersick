@@ -12,17 +12,21 @@
         <input name="from" type="text" placeholder="Airport" class="typeahead" value="<%= @airport.iata_code %>" />
         <div id="typeahead-spinner"></div>
       </div>
-      <div class="search-part span3">
+      <div class="search-part">
         <label >to somewhere</label>
         <div class="weather"><span>1</span> sunny</div>
       </div>
       <div class="search-part">
         <label>from</label>
-        <input name="date_from" type="text" class="datepicker input-medium" value="<%= @date_from %>" />
+        <input name="date_from" type="text" class="datepicker input-date" value="<%= @date_from %>" />
       </div>
       <div class="search-part">
         <label>to</label>
-        <input name="date_to" type="text" class="datepicker input-medium"value="<%= @date_to %>" />
+        <input name="date_to" type="text" class="datepicker input-date" value="<%= @date_to %>" />
+      </div>
+      <div class="search-part">
+        <label><i class="icon-group"></i></label>
+        <input name="passengers" type="text" class="input-mini" value="2" />
       </div>
       <a class="btn btn-large btn-primary btn-block" id="search-submit">GO</a>
     </form>
