@@ -144,6 +144,26 @@ body {
 
 }
 
+.svgmap-tiny {
+
+  .land {
+    fill: darken($cyan, 10%);
+    stroke: none; /* rgba(255,255,255,0.25); */
+    
+  }
+
+  .highlighted {
+    fill: #F00 !important;
+  }
+
+  .flightpath {
+    fill: none;
+    stroke: rgba(yellow, 0.4);
+    stroke-dasharray: 2,2;
+  }
+
+}
+
 #wrapper {
   margin: 0 auto; 
   width: 980px;
@@ -332,84 +352,6 @@ body {
   }
 
 
-  .front {
-    width: 938px;
-    padding: 20px;
-    height: 100px;
-    font-size: 24px;
-    border-radius: 10px;
-    // @include gradient($cyan, darken($cyan, 2%));
-    background: $cyan;
-    border-top: 3px solid darken($cyan, 10%);
-    border-left: 1px solid darken($cyan, 5%); 
-    border-right: 1px solid darken($cyan, 5%); 
-    border-bottom: 2px solid darken($cyan, 10%);
-
-    position: absolute;
-    z-index: 1;
-    cursor: pointer;
-
-    box-shadow: $shadow3 $black50;
-
-    font-family: 'Inconsolata';
-
-    .price {
-      position: absolute;
-      right: 15px;
-      top: 15px;
-      width: 100px;
-      height: 100px;
-
-      font-size: 36px;
-      font-family: 'helvetica neue';
-      font-weight: 500;
-      border-radius: 75px;
-      background-color: darken($orange, 10%);
-      // background-image: url('price-paper.png');
-      box-shadow: inset $shadow3 $black50;
-      border: 7px solid $orange;
-      color: white;
-
-      div.spinner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100px;
-        height: 100px;
-        background-color: darken($orange, 10%);
-        border-radius: 75px;
-      }
-     
-      // -webkit-transform: rotate(5deg);
-
-      div.from {
-        position: relative;
-        font-size: 19px;
-        top: 10px;
-        text-align: center;
-        font-weight: 900;
-        color: rgba(0,0,0,0.3)
-      }
-      div.fare {
-        position: relative;
-        top: 22px;
-        letter-spacing: 2px;
-        text-align: center;
-        text-shadow: $shadow7 $yellow;
-        font-family: 'oleo script';
-      }
-
-      div.way {
-        position: relative;
-        top: 30px;
-        font-size: 12px;
-        text-align: center;
-        font-weight: 900;
-        color: rgba(0,0,0,0.3)
-      }
-    }
-  }
-
   .back {
     -webkit-transform: rotateX(-180deg);
     cursor: pointer;
@@ -437,12 +379,6 @@ body {
   top: 180px;
   display: none;
 }
-
-#cities {
-  float: left;
-  margin-top: 20px;
-}
-
 
 #results-description {
   float: left;
@@ -499,59 +435,151 @@ body {
 
 }
 
-.city-info {
-  width: 300px;
-  height: 100px;
-  margin: -20px;
-  margin-right: 20px;
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+#cities {
+  float: left;
+  margin-top: 20px;
+}
+
+.city.search-result {
+
+  position: relative;
+
+  float: left;
+  margin-bottom: 20px;
+  width: 938px;
   padding: 20px;
-  border-right: 1px solid darken($cyan, 10%);
-  
-  float: left;
+  height: 100px;
+  font-size: 24px;
+  border-radius: 10px;
+  // @include gradient($cyan, darken($cyan, 2%));
+  background: $cyan;
+  border-top: 3px solid darken($cyan, 10%);
+  border-left: 1px solid darken($cyan, 5%); 
+  border-right: 1px solid darken($cyan, 5%); 
+  border-bottom: 2px solid darken($cyan, 10%);
 
-  .city-name {
-    font-family: $font-head;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+  box-shadow: $shadow3 $black50;
 
-  .province-country-name {
-    font-family: $font-head;
-    font-size: 14px;
-  }
+  font-family: 'Inconsolata';
 
-}
+  .price {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 100px;
+    height: 100px;
 
-.city-weather {
-  height: 120px;
-  margin: -20px;
-  margin-right: 20px;
-  padding: 10px 20px;
-  border-right: 1px solid darken($cyan, 10%);
+    font-size: 36px;
+    font-family: 'helvetica neue';
+    font-weight: 500;
+    border-radius: 75px;
+    background-color: darken($orange, 10%);
+    // background-image: url('price-paper.png');
+    box-shadow: inset $shadow3 $black50;
+    border: 7px solid $orange;
+    color: white;
 
-  float: left;
+    div.spinner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background-color: darken($orange, 10%);
+      border-radius: 75px;
+    }
+   
+    // -webkit-transform: rotate(5deg);
 
-  .city-weather-row {
-
-    font-size: 20px;
-    color: darken($cyan, 20%);
-
-    td {
+    div.from {
+      position: relative;
+      font-size: 19px;
+      top: 10px;
       text-align: center;
-      vertical-align: middle;
-      height: 25px;
-      padding: 3px 5px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.3)
+    }
+    div.fare {
+      position: relative;
+      top: 22px;
+      letter-spacing: 2px;
+      text-align: center;
+      text-shadow: $shadow7 $yellow;
+      font-family: 'oleo script';
     }
 
-    td.temp {
-      font-family: $font-script;
+    div.way {
+      position: relative;
+      top: 30px;
+      font-size: 12px;
+      text-align: center;
+      font-weight: 900;
+      color: rgba(0,0,0,0.3)
+    }
+  }
+
+  .city-info {
+    width: 300px;
+    height: 100px;
+    margin: -20px;
+    margin-right: 20px;
+    padding: 20px;
+    border-right: 1px solid darken($cyan, 10%);
+    
+    float: left;
+
+    .city-name {
+      font-family: $font-head;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
 
-    span.icon {
-        font-family: 'MeteoconsRegular';
-        font-size: 25px;
+    .province-country-name {
+      font-family: $font-head;
+      font-size: 14px;
     }
+  }
 
+  .city-weather {
+    height: 120px;
+    margin: -20px;
+    margin-right: 20px;
+    padding: 10px 20px;
+    border-right: 1px solid darken($cyan, 10%);
+
+    float: left;
+
+    .city-weather-row {
+
+      font-size: 20px;
+      color: darken($cyan, 20%);
+
+      td {
+        text-align: center;
+        vertical-align: middle;
+        height: 25px;
+        padding: 3px 5px;
+      }
+
+      td.temp {
+        font-family: $font-script;
+      }
+
+      span.icon {
+          font-family: 'MeteoconsRegular';
+          font-size: 25px;
+      }
+    }
+  }
+
+  .city-world-map {
+    float: left;
+    width: 150px;
+    height: 70px;
   }
 }
+
+

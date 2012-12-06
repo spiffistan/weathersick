@@ -1,42 +1,37 @@
 <% for city in @cities: %>
-<div class="flip">
-  <div class="city search-result card" id="city-<%= city.city_id %>">
-    <div class="front face"> 
-      <div class="city-info">
-        <div class="city-name"><%= city.city_name %></div>
-        <div class="province-country-name"><%= city.province_name %>, <%= city.country_name %></div>
-      </div>
-      <div class="city-weather">
-        <table>
-          <tr class="city-weather-row">
-            <td><span class="icon">3</span></td><td><%= city.weather[0].chance_partly_or_sunny %>%</td>
-          </tr>
-          <tr class="city-weather-row">
-            <td><span class="icon">8</span></td><td><%= city.weather[0].chance_crappy %>%</td>
-          </tr>
-          <tr class="city-weather-row">
-            <td><span class="icon">'</span></td><td><%= city.weather[0].chance_hightemp %>%</td>
-          </tr>
-          <tr class="city-weather-row">
-            <td class="temp"><%= city.weather[0].high_avg_c %><span class="icon">*</span></td>
-            <td class="temp"><%= city.weather[0].high_avg_f %><span class="icon">+</span></td>
-          </tr>
-        </table>
-        <a href="<%= city.booking_link %>">
-        <div class="price">
-          <div class="from">from</div>
-          <div class="fare">
-            $<%= city.total_fare %>
-          </div>
-          <div class="way">one-way</div>
-        </div>
-        </a>
-      </div>
+<div class="city search-result show-flights" id="city-<%= city.city_id %>">
+  <div class="city-info">
+    <div class="city-name"><%= city.city_name %></div>
+    <div class="province-country-name"><%= city.province_name %>, <%= city.country_name %></div>
+    <div class="city-world-map svgmap-tiny">
     </div>
-
-    <div class="back face">
+  </div>
+  <div class="city-weather">
+    <table>
+      <tr class="city-weather-row">
+        <td><span class="icon">3</span></td><td><%= city.weather[0].chance_partly_or_sunny %>%</td>
+      </tr>
+      <tr class="city-weather-row">
+        <td><span class="icon">8</span></td><td><%= city.weather[0].chance_crappy %>%</td>
+      </tr>
+      <tr class="city-weather-row">
+        <td><span class="icon">'</span></td><td><%= city.weather[0].chance_hightemp %>%</td>
+      </tr>
+      <tr class="city-weather-row">
+        <td class="temp"><%= city.weather[0].high_avg_c %><span class="icon">*</span></td>
+        <td class="temp"><%= city.weather[0].high_avg_f %><span class="icon">+</span></td>
+      </tr>
+    </table>
+  </div>
+  <a <% # href="<%= city.booking_link " %> >
+    <div class="price">
+      <div class="from">from</div>
+      <div class="fare">
+        $<%= city.total_fare %>
+      </div>
+      <div class="way">one-way</div>
     </div>
-
+  </a>
   </div>
 </div>
 <% end %>

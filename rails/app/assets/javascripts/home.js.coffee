@@ -1,15 +1,13 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
 
+  svgmap = new SVGMap()
+  svgmap.renderFrontPage()
 
-$ -> 
-
-  $('.datepicker').datepicker({'format':'dd-M-yyyy','weekStart':'1'});
+  $('.datepicker').datepicker({'format':'dd-M-yyyy','weekStart':'1'})
 
   $('.flip').live 'click', (event) ->
     $(this).find('.card').addClass('flipped').mouseleave ->
-      $(this).removeClass('flipped');
+      $(this).removeClass('flipped')
 
   spinneropts =
     lines: 12

@@ -1,3 +1,5 @@
+# TODO: refactor into methods to avoid callback spaghetti
+
 class Weathersick.Routers.Cities extends Backbone.Router
 
   routes:
@@ -25,6 +27,9 @@ class Weathersick.Routers.Cities extends Backbone.Router
                 flights = new Weathersick.Collections.Flights()
 
                 $('#city-' + city.attributes.city_id + ' .price').append('<div class="spinner">')
+
+                svgmap = new SVGMap()
+                svgmap.renderTinyMap('#city-' + city.attributes.city_id + ' .city-world-map', city.attributes.lat, city.attributes.lon)
                 
                 spinneropts =
                   lines: 17
@@ -45,25 +50,25 @@ class Weathersick.Routers.Cities extends Backbone.Router
 
                 $('#city-' + city.attributes.city_id + ' .price .spinner')
 
-                spinner = new Spinner(spinneropts).spin($('#city-' + city.attributes.city_id + ' .price .spinner').get(0))
+#                spinner = new Spinner(spinneropts).spin($('#city-' + city.attributes.city_id + ' .price .spinner').get(0))
 
-                flights.fetch
-                  data:
-                    to: t
-                    from: f
-                    #date_from: "08/10/2012" # needs to be urldecoded, does not work atm
-                    #date_to: "15/10/2012"
-                    type: 1
-                    adults: 1
-                  success: =>
-                    $('#city-' + city.attributes.city_id + ' .fare').text('$' + flights.at(0).attributes.total_fare)
-                    $('#city-' + city.attributes.city_id + ' a').attr('href', flights.at(0).attributes.booking_link)
-                    $('#city-' + city.attributes.city_id + ' a').attr("target", "_blank")
-                    $('#city-' + city.attributes.city_id + ' .price .spinner').fadeOut 'fast', ->
-                      this.remove()
-                      # TODO populate flights
-                  error: =>
-                    console.log("no flight :(")
+                # TODO
+#                flights.fetch
+#                  data:
+#                    to: t
+#                    from: f
+#                    #date_from: "08/10/2012" # needs to be urldecoded, does not work atm
+#                    #date_to: "15/10/2012"
+#                    type: 1
+#                    adults: 1
+#                  success: =>
+#                    $('#city-' + city.attributes.city_id + ' .fare').text('$' + flights.at(0).attributes.total_fare)
+#                    $('#city-' + city.attributes.city_id + ' a').attr('href', flights.at(0).attributes.booking_link)
+#                    $('#city-' + city.attributes.city_id + ' a').attr("target", "_blank")
+#                    $('#city-' + city.attributes.city_id + ' .price .spinner').remove()
+#                      # TODO populate flights
+#                  error: =>
+#                    console.log("no flight :(")
                 
 
           

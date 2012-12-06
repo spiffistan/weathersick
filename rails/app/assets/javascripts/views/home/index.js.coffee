@@ -27,16 +27,13 @@ class Weathersick.Views.HomeIndex extends Backbone.View
     'click #search-submit': 'randomCities'
 
   randomCities: ->
+    # TODO: fade out a parent container
     $('#cities').fadeOut(100)
     $('#logo').fadeOut(100)
     $('#map-container').fadeOut(100)
     $('#description').fadeOut(100)
-    # accelerateClouds(1, 0.2)
     $('#search-container').animate(top: 100, 500, ->
       $('#spinner').fadeIn(100)
-      # Weathersick.citiesRouter.list()
       params = $('#search-form').serializeArray()
       Weathersick.citiesRouter.niceNear(params)
-      # TODO decelerate
-      window.cloudSpeed = 0.01
     )

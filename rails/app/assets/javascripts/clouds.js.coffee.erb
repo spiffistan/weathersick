@@ -103,6 +103,6 @@ render = ->
 
   renderer.render( scene, camera )
 
-if ! Detector.webgl
+if Detector.webgl
   init()
   animate()
