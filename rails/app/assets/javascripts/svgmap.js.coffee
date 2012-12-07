@@ -76,8 +76,6 @@ class window.SVGMap
 
   renderTinyMap: (el, lat, lon) ->
 
-    console.log('lol')
-
     width = 100
     height = 70
     scale = 20
@@ -101,11 +99,9 @@ class window.SVGMap
       circles.append('svg:circle')
         .attr('cx', ll[0])
         .attr('cy', ll[1])
-        .attr('r', 1.5)
+        .attr('r', 1.7)
         .attr('class', 'highlighted')
 
-      # node = countries.select("#Antarctica")
-      # node.parentNode.removeChild(node)
 
       countries.selectAll("path")
         .data(collection.features)
@@ -118,6 +114,7 @@ class window.SVGMap
         .text (d) ->
           d.properties.name
 
+      countries.select("#Antarctica").remove() # We don't need to show this.
 
 
 

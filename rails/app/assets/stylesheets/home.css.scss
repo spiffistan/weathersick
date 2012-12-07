@@ -147,13 +147,13 @@ body {
 .svgmap-tiny {
 
   .land {
-    fill: darken($cyan, 10%);
+    fill: darken($cyan, 20%);
     stroke: none; /* rgba(255,255,255,0.25); */
     
   }
 
   .highlighted {
-    fill: #F00 !important;
+    fill: rgba(red, 1.0);
   }
 
   .flightpath {
@@ -576,7 +576,9 @@ body {
   }
 
   .city-world-map {
-    float: left;
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
     width: 150px;
     height: 70px;
   }
