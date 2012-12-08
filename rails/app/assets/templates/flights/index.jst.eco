@@ -1,34 +1,20 @@
 <% for flight in @flights: %>
-<div class="flip">
-  <div class="flight search-result card">
-    <div class="front face"> 
+<div class="flight search-result card flip">
+  <div class="front face"> 
 
-      <a href="<%= flight.booking_link %>">
-      <div class="price">
-          <div class="from">from</div>
-          <div class="fare">
-            $<%= flight.total_fare %>
-          </div>
-          <div class="way">one-way</div>
-      </div>
-      </a>
+    <a href="<%= flight.booking_link %>">
+    <div class="price">
+        <div class="from">from</div>
+        <div class="fare">
+          $<%= flight.total_fare %>
+        </div>
+        <div class="way">one-way</div>
     </div>
-
-
-    <div class="back face">
-        <% i = 1 %>
-    <% for segment in flight.segments: %>
-      <% a = moment(new Date(segment.departure_datetime)) %>
-      <% b = moment(new Date(segment.arrival_datetime)) %>
-      <div></div>
-      <div class="segment">
-        Flight <%= i++ %>:
-        <%= segment.departure_code %>-<%= segment.arrival_code %> &nbsp;
-        <%= a.format('MMM Do hh:mm:ss') %> - <%= b.format('MMM Do hh:mm:ss') %> (<%= a.from(b, true) %>)
-      </div>
-    <% end %>
-    </div>
-
+    </a>
   </div>
+
+
+
+
 </div>
 <% end %>

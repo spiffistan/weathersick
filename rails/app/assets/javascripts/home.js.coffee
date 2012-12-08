@@ -5,9 +5,9 @@ $ ->
 
   $('.datepicker').datepicker({'format':'dd-M-yyyy','weekStart':'1'})
 
-  $('.flip').live 'click', (event) ->
-    $(this).find('.card').addClass('flipped').mouseleave ->
-      $(this).removeClass('flipped')
+#  $('.flip').live 'click', (event) ->
+#    $(this).find('.card').addClass('flipped').mouseleave ->
+#      $(this).removeClass('flipped')
 
   spinneropts =
     lines: 12

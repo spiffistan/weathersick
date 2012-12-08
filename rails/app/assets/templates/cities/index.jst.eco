@@ -1,5 +1,5 @@
 <% for city in @cities: %>
-<div class="city search-result show-flights" id="city-<%= city.city_id %>">
+<div class="city search-result show-flights" id="city-<%= city.city_id %>" data-iata-code="<%= city.iata_code %>">
   <div class="city-info">
     <div class="city-name"><%= city.city_name %></div>
     <div class="province-country-name"><%= city.province_name %>, <%= city.country_name %></div>

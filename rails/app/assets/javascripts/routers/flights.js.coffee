@@ -3,10 +3,9 @@ class Weathersick.Routers.Flights extends Backbone.Router
   routes:
     'flights': 'list'
 
-  list: =>
-    flights = new Weathersick.Collections.Flights()
-
+  list: (params) =>
     if(params)
+      flights = new Weathersick.Collections.Flights()
       flights.fetch
         data: params
         success: ->

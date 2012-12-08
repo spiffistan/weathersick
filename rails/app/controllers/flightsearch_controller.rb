@@ -1,3 +1,5 @@
+# TODO cleanup. Not RESTful.
+
 class FlightsearchController < ApplicationController
   DATE_FORMAT = '%v'
   
@@ -12,6 +14,8 @@ class FlightsearchController < ApplicationController
   end
   
   def index
+    # TODO: cleanup
+    # TODO: error checking
     booker_params = { id: 'commj', type: 12, url: 'http://www.weathersick.com' }
     booker = Flight::VayamaSearch.new(nil, booker_params)
     foo = (DateTime.now.next_week.next_day(5)).to_date.strftime(DATE_FORMAT)
@@ -34,12 +38,11 @@ class FlightsearchController < ApplicationController
     to = params[:to] || 'LHR'
     adults = params[:adults] || 1
     children = params[:children] || 0
-    limit = params[:limit] || 5
+    limit = params[:limit] || 16
     type = params[:type] || "1" # 1 = OW, 2 = RT
     
     limit = Integer(limit)
     
-    logger.debug params
     #logger.debug "From: {from}"
     
     #destination = Hash.new
@@ -52,6 +55,7 @@ class FlightsearchController < ApplicationController
     else
       results = booker.search(Flight::VayamaSearch::SEARCH_RT, from, to, adults, children, date_from, date_to, limit)
     end
+    puts results
     respond_with results
     #if (results.empty?)
     #  results.each do |result|

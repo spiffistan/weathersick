@@ -93,6 +93,9 @@ class HomeController < ApplicationController
       w = list.select { |element| element.station == city.wstation_code }
       destination[:weather] << JSON.parse(w[0].to_json) # XXX :( le uglies
       airport = Airport.nearest(city.loc)
+      destination[:iata_code] = airport.iata_code
+
+      puts destination
       
       destinations << destination 
     end
