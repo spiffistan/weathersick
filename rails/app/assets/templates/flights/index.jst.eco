@@ -1,14 +1,15 @@
 <% for flight in @flights: %>
 <div class="flight search-result card flip">
   <div class="front face"> 
-
+    <div class="connection">
+    <% for segment in flight.trips[0].segments: %>
+        <%= segment.departure_code %> <i class="icon-arrow-right"></i>
+        <%= segment.arrival_code %>
+    <% end %>
+    </div>
     <a href="<%= flight.booking_link %>">
     <div class="price">
-        <div class="from">from</div>
-        <div class="fare">
-          $<%= flight.total_fare %>
-        </div>
-        <div class="way">one-way</div>
+      $<%= flight.total_fare %>
     </div>
     </a>
   </div>

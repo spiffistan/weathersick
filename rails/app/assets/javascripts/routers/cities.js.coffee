@@ -15,41 +15,41 @@ class Weathersick.Routers.Cities extends Backbone.Router
           $('#spinner').fadeOut(300)
           list = new Weathersick.Views.CitiesIndex(model: cities)
           list.render()
-          f = params.shift().value
+#          f = params.shift().value
           cities.each (city) ->
+            svgmap = new SVGMap()
+            svgmap.renderTinyMap('#city-' + city.attributes.city_id + ' .city-world-map', city.attributes.lat, city.attributes.lon)
             # XXX perhaps move
-            airports = new Weathersick.Collections.Airports()
-            airports.fetch
-              data:
-                location: city.attributes.lat + "," + city.attributes.lon
-              success: =>
-                t = airports.first().attributes.iata_code
-                flights = new Weathersick.Collections.Flights()
-
-                $('#city-' + city.attributes.city_id + ' .price').append('<div class="spinner">')
-
-                svgmap = new SVGMap()
-                svgmap.renderTinyMap('#city-' + city.attributes.city_id + ' .city-world-map', city.attributes.lat, city.attributes.lon)
-                
-                spinneropts =
-                  lines: 17
-                  length: 6
-                  width: 4
-                  radius: 29
-                  corners: 1.0
-                  rotate: 0
-                  color: '#fff'
-                  speed: 0.5
-                  trail: 25
-                  shadow: false
-                  hwaccel: true
-                  className: 'spinner'
-                  zIndex: 2e9
-                  top: 'auto'
-                  left: 'auto'
-
-                $('#city-' + city.attributes.city_id + ' .price .spinner')
-
+#            airports = new Weathersick.Collections.Airports()
+#            airports.fetch
+#              data:
+#                location: city.attributes.lat + "," + city.attributes.lon
+#              success: =>
+#                t = airports.first().attributes.iata_code
+#                flights = new Weathersick.Collections.Flights()
+#
+#                $('#city-' + city.attributes.city_id + ' .price').append('<div class="spinner">')
+#
+#                
+#                spinneropts =
+#                  lines: 17
+#                  length: 6
+#                  width: 4
+#                  radius: 29
+#                  corners: 1.0
+#                  rotate: 0
+#                  color: '#fff'
+#                  speed: 0.5
+#                  trail: 25
+#                  shadow: false
+#                  hwaccel: true
+#                  className: 'spinner'
+#                  zIndex: 2e9
+#                  top: 'auto'
+#                  left: 'auto'
+#
+#                $('#city-' + city.attributes.city_id + ' .price .spinner')
+#
 #                spinner = new Spinner(spinneropts).spin($('#city-' + city.attributes.city_id + ' .price .spinner').get(0))
 
                 # TODO

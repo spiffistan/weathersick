@@ -14,6 +14,7 @@ class Weathersick.Views.CitiesIndex extends Backbone.View
     content = @template(cities: @model.toJSON())
     $(@container).html(content).show 0, ->
       $('#cities-container').fadeIn 300
+      $('#search-submit').text('More!')
 
   showFlights: (e) ->
     $(@el).fadeOut(300)

@@ -28,6 +28,8 @@ class Weathersick.Views.HomeIndex extends Backbone.View
 
   randomCities: ->
     # TODO: fade out a parent container
+    $('#cities-container').fadeOut(300)
+    $('#flights-container').fadeOut(300)
     $('#logo').fadeOut(100)
     $('#map-container').fadeOut(100)
     $('#description').fadeOut(100)

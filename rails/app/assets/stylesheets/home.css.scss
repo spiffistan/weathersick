@@ -450,6 +450,8 @@ body {
 
   position: relative;
 
+  cursor: pointer;
+
   float: left;
   margin-bottom: 20px;
   width: 938px;
@@ -462,7 +464,7 @@ body {
   border-top: 3px solid darken($cyan, 10%);
   border-left: 1px solid darken($cyan, 5%); 
   border-right: 1px solid darken($cyan, 5%); 
-  border-bottom: 2px solid darken($cyan, 10%);
+  border-bottom: 2px solid lighten($cyan, 5%);
 
   box-shadow: $shadow3 $black50;
 
@@ -586,6 +588,10 @@ body {
     width: 150px;
     height: 70px;
   }
+
+  &:hover {
+    background: darken($cyan, 2%);
+  }
 }
 
 /* ------------------------------- Flights --------------------------------- */
@@ -597,11 +603,26 @@ body {
   display: none;
 }
 
+#flights-controls {
+  color: white;
+  font-family: 'oleo script';
+  font-size: 22px;
+  text-shadow: $shadow3 $black50;
+  margin-bottom: 20px;
+  padding: 0px 20px;
+
+  a { 
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+      text-transform: none;
+    }
+  }
+}
+
 #flights {
   display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 980px;
   height: 1000px;
 }
@@ -610,11 +631,12 @@ body {
 
   position: relative;
 
+  cursor: pointer;
+
   float: left;
   margin-bottom: 17px;
-  width: 200px;
+  width: 230px;
   margin-right: 17px;
-  padding: 15px;
   height: 100px;
   font-size: 24px;
   border-radius: 10px;
@@ -631,4 +653,32 @@ body {
     margin-right: 0px;
   }
 
+  .airline {
+    font-family: $font-head;
+    width: 220px;
+    padding: 5px;
+    border-bottom: 2px solid darken($cyan, 10%);
+  }
+
+  .connection {
+    font-family: $font-mono;
+    font-size: 12px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: darken($cyan, 20%);
+  }
+
+  .price {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 22px;
+    font-family: $font-mono;
+    color: darken($cyan, 20%);
+  }
+
+  &:hover {
+    background: darken($cyan, 2%);
+  }
 }

@@ -1,7 +1,6 @@
 require 'time'
 require 'net/http'
 
-
 # Interface to the Vayama API
 class Flight::VayamaSearch < Flight::Search
 
@@ -25,11 +24,9 @@ class Flight::VayamaSearch < Flight::Search
 
     response = send_request(request)
 
-
     # TODO if response error
     results = process_response(type, response, limit)
-    # XXX present results? 
-    #
+    
     return results
   end
 
@@ -74,8 +71,11 @@ class Flight::VayamaSearch < Flight::Search
           end
         
         when SEARCH_OJ # Open-jaw search
+          raise NotImplementedError, 'Open-Jaw search is not implemented'
         when SEARCH_MC # Multi-city search
+          raise NotImplementedError, 'Multi-city search is not implemented'
         when SEARCH_LB # Location-based search
+          raise NotImplementedError, 'Location-based search is not implemented'
         end
 
         # TODO
