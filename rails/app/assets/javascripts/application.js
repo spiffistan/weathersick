@@ -20,6 +20,7 @@
 //= require lib/spin
 //= require lib/d3.v3.min
 //= require lib/projection
+//= require lib/Stats
 //= require lib/ThreeWebGL
 //= require lib/ThreeExtras
 //= require lib/Detector

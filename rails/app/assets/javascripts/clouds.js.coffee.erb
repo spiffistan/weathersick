@@ -18,6 +18,13 @@ fogColor = 0x4584b4
 fogNear = -1
 fogFar = 3000
 
+stats = new Stats()
+stats.setMode(1)
+stats.domElement.style.position = 'absolute'
+stats.domElement.style.left = '0px'
+stats.domElement.style.top = '0px'
+document.body.appendChild(stats.domElement)
+
 init = ->
 
   container = document.createElement('div')
@@ -89,7 +96,9 @@ animate = ->
     render()
 
 
+
 render = ->
+  stats.update()
 
   position = ( ( new Date().getTime() - startTime ) * 0.025 ) % 8000
 
