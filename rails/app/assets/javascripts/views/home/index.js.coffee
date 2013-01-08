@@ -35,6 +35,8 @@ class Weathersick.Views.HomeIndex extends Backbone.View
     $('#description').fadeOut(100)
     $('#search-container').animate(top: 100, 500, ->
       $('#spinner').fadeIn(100)
+      $('#loading-text').text('Loading sunny cities...')
+      $('#loading-text').fadeIn(100)
       params = $('#search-form').serializeArray()
       Weathersick.citiesRouter.niceNear(params)
     )

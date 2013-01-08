@@ -3,8 +3,10 @@
   <div class="front face"> 
     <div class="connection">
     <% for segment in flight.trips[0].segments: %>
+        <i class="icon-plane"></i>
         <%= segment.departure_code %> <i class="icon-arrow-right"></i>
         <%= segment.arrival_code %>
+        <br />
     <% end %>
     </div>
     <a href="<%= flight.booking_link %>">

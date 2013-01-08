@@ -17,6 +17,7 @@ class Weathersick.Views.CitiesIndex extends Backbone.View
       $('#search-submit').text('More!')
 
   showFlights: (e) ->
+    # $(@el).fadeOut(300)
     $(@el).fadeOut(300)
     clicked = $(e.currentTarget)
     params = $('#search-form').serializeArray()

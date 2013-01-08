@@ -181,6 +181,21 @@ body {
     display: none;
   }
 
+  #loading-text {
+    position: absolute;
+    top: 35%;
+    width: 300px;
+    height: 100px;
+    left: 50%;
+    font-family: $font-script;
+    font-size: 22px;
+    text-align: center;
+    color: white;
+    margin-left: -150px;
+    display: none;
+    opacity: 0.5;
+  }
+
   #logo {
     position: absolute; 
     height: 100px;

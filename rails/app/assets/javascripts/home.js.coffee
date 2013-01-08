@@ -1,7 +1,14 @@
-$ ->
+window.DEBUG = true
+
+$(document).ready ->
 
   svgmap = new SVGMap()
   svgmap.renderFrontPage()
+
+  if Detector.webgl # We have webgl, create some clouds!
+    clouds = new Clouds()
+    clouds.init()
+    clouds.animate()
 
   $('.datepicker').datepicker({'format':'dd-M-yyyy','weekStart':'1'})
 

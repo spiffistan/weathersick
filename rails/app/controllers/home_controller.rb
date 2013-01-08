@@ -54,7 +54,7 @@ class HomeController < ApplicationController
     from_iata = params[:from]
     date_from = DateTime.strptime(params[:date_from], DATE_FORMAT)
     date_to = DateTime.strptime(params[:date_to], DATE_FORMAT)
-    range = ((date_from.cweek + 1)..(date_to.cweek + 1)) # cweek starts with 0
+    range = (date_from.cweek .. date_to.cweek) # cweek starts with 0
     sloc = Airport.where(iata_code: from_iata).first.sphereloc
 
     q = { 
@@ -63,8 +63,8 @@ class HomeController < ApplicationController
         chance_hightemp: { "$gte" => 80 }, 
         chance_crappy: { "$lte" => 20 }, 
         week: { "$in" => range.to_a } 
-      ],
-      sphereloc: {"$near" => sloc, "$maxDistance" => 100 }, 
+      ]
+      # sphereloc: {"$near" => sloc, "$maxDistance" => 100 }, 
     }
 
     list = HistoricalWeather.where(q).fields(

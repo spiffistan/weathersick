@@ -28,6 +28,7 @@
 //= require backbone
 //= require weathersick
 //= require svgmap
+//  require clouds
 //= require home
 //= require_tree ../templates/
 //= require_tree ./models

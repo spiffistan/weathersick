@@ -13,6 +13,7 @@ class Weathersick.Routers.Cities extends Backbone.Router
         data: params
         success: ->
           $('#spinner').fadeOut(300)
+          $('#loading-text').fadeOut(300)
           list = new Weathersick.Views.CitiesIndex(model: cities)
           list.render()
 #          f = params.shift().value
@@ -69,7 +70,3 @@ class Weathersick.Routers.Cities extends Backbone.Router
 #                      # TODO populate flights
 #                  error: =>
 #                    console.log("no flight :(")
-                
-
-          
-          

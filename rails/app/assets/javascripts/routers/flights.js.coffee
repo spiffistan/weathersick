@@ -6,6 +6,8 @@ class Weathersick.Routers.Flights extends Backbone.Router
   list: (params) ->
     if(params)
       $('#spinner').fadeIn(300)
+      $('#loading-text').text('Loading flights...')
+      $('#loading-text').fadeIn(300)
       flights = new Weathersick.Collections.Flights()
       flights.fetch
         data: params

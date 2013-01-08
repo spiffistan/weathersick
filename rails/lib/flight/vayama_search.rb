@@ -71,11 +71,11 @@ class Flight::VayamaSearch < Flight::Search
           end
         
         when SEARCH_OJ # Open-jaw search
-          raise NotImplementedError, 'Open-Jaw search is not implemented'
+          # raise NotImplementedError, 'Open-Jaw search is not implemented'
         when SEARCH_MC # Multi-city search
-          raise NotImplementedError, 'Multi-city search is not implemented'
+          # raise NotImplementedError, 'Multi-city search is not implemented'
         when SEARCH_LB # Location-based search
-          raise NotImplementedError, 'Location-based search is not implemented'
+          # raise NotImplementedError, 'Location-based search is not implemented'
         end
 
         # TODO
