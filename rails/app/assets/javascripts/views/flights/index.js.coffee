@@ -16,5 +16,5 @@ class Weathersick.Views.FlightsIndex extends Backbone.View
       $('#flights-container').fadeIn 300
    
   backToCities: =>
-    $('#flights-container').fadeIn(300)
-    $('#cities-container').fadeOut(300)
+    $('#flights-container').fadeOut(300)
+    $('#cities-container').fadeIn(300)
